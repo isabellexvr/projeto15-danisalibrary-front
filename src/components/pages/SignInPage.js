@@ -19,7 +19,7 @@ export default function SignInPage() {
   if (isLogged) {
     const data = JSON.parse(isLogged);
     setToken(data.token);
-    navigate("/main");
+    navigate("/market");
     return;
   }
 
@@ -31,20 +31,19 @@ export default function SignInPage() {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(()=>{
-      console.log(form)
-      setLoading(false)
-    },2000)
-
-/*     axios
+    axios
       .post("http://localhost:5000/sign-in", form)
       .then((answer) => {
-        navigate("/main");
+        navigate("/market");
+        console.log(answer);
+        setToken(answer.data.token);
+        const serialized = JSON.stringify(answer.data);
+        localStorage.setItem("data", serialized);
       })
       .catch((err) => {
-        alert(err.response.data);
+        console.log(err.response.data);
         setLoading(false);
-      }); */
+      });
   }
   return (
     <HomePageBackground>

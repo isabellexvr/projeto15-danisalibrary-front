@@ -4,16 +4,26 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import HomePageBackground from "../constants/HomePageBackground";
 import { colors } from "../../colors";
+import { useToken } from "../../contexts/Token";
 
 export default function WelcomePage() {
   const navigate = useNavigate();
+  const { setToken } = useToken();
+
+  const isLogged = localStorage.getItem("data");
+  if (isLogged) {
+    const data = JSON.parse(isLogged);
+    setToken(data.token);
+    navigate("/market");
+    return;
+  }
 
   return (
     <ThemeContainer>
       <HomePageBackground>
         <EnterButton
           onClick={() => {
-            navigate("/sign-in");
+            navigate("/sign-up");
           }}
         >
           Tornar-se Cliente
