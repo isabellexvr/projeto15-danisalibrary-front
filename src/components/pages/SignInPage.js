@@ -19,7 +19,7 @@ export default function SignInPage() {
   if (isLogged) {
     const data = JSON.parse(isLogged);
     setToken(data.token);
-    navigate("/main");
+    navigate("/market");
     return;
   }
 
@@ -35,6 +35,10 @@ export default function SignInPage() {
       .post("http://localhost:5000/sign-in", form)
       .then((answer) => {
         navigate("/market");
+        console.log(answer);
+        setToken(answer.data.token);
+        const serialized = JSON.stringify(answer.data);
+        localStorage.setItem("data", serialized);
       })
       .catch((err) => {
         console.log(err.response.data);
