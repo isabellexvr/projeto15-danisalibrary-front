@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { BsGithub } from "react-icons/bs";
-import { BiMenuAltLeft } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import { useTheme, themes } from "../../contexts/Theme";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
-
+  const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
 
   return (
@@ -29,7 +30,18 @@ export default function Sidebar() {
                 <div className="ball"></div>
               </label>
             </SwitchThemes>
-            <UserInfo></UserInfo>
+
+            <UserInfo>
+              <LogOut
+                onClick={() => {
+                  localStorage.removeItem("data");
+                  navigate("/");
+                }}
+              >
+                <BiLogOut />
+                <h1>Fazer Logout</h1>
+              </LogOut>
+            </UserInfo>
             <div className="sidebar-content">
               <div className="devs">
                 <h1>Conheça as desenvolvedoras desse projeto:</h1>
@@ -42,13 +54,13 @@ export default function Sidebar() {
                     >
                       <BsGithub />
                     </a>
-                    <h2>isabellexvr</h2>
+                    <h2>dcaaz</h2>
                   </div>
                   <div className="dev">
                     <a
                       rel="noreferrer noopener"
                       target="_blank"
-                      href="https://github.com/isabellexvr"
+                      href="https://github.com/dcaaz/"
                     >
                       <BsGithub />
                     </a>
@@ -181,11 +193,25 @@ const OutSideBar = styled.div`
 const UserInfo = styled.div`
   background-color: #846aa6;
   width: 90%;
-  height: 30vw;
+  height: 100vw;
   border-radius: 5px;
 `;
 
-/* precisa de 
-<Sidebar setSidebar={setSidebar} sidebar={sidebar}/>
-  const [sidebar, setSidebar] = useState(false);
-  import Sidebar from "../constants/Sidebar"; */
+const LogOut = styled.div`
+  margin-top: 15px;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60px;
+  width: 80px;
+  > h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    text-align: center;
+  }
+  > svg {
+    font-size: 30px;
+  }
+`;
