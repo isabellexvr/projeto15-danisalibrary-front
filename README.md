@@ -1,24 +1,4 @@
-## ReactDriven Template
+## Projeto de e-commerce.
 
-React + Axios + Styled-Components + React Router + Font Roboto
+Meus singelos agradecimentos à TSaytson pelo template.
 
-### Começando
-
-#### Clone o repositório
-
-```
-npx degit TSaytson/reactdriven-template my-app
-```
-```
-cd my-app
-```
-
-#### Instale as dependências
-```
-npm install
-```
-
-#### Rode :)
-```
-npm start
-```
