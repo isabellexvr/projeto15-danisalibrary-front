@@ -33,7 +33,11 @@ export default function SignUpPage() {
     setLoading(true);
     if (form.password === form.confirmPassword) {
       delete form.confirmPassword;
-      axios
+      setTimeout(()=>{
+        console.log(form)
+        setLoading(false)
+      },2000)
+/*       axios
         .post("http://localhost:5000/sign-up", form)
         .then((answer) => {
           alert(answer.data);
@@ -43,7 +47,7 @@ export default function SignUpPage() {
           console.log(err.response.data);
           alert(err.response.data);
           setLoading(false);
-        });
+        }); */
     } else {
       alert("As senhas não coindidem.");
       setLoading(false);
@@ -78,7 +82,7 @@ export default function SignUpPage() {
             <input
               onChange={handleForm}
               placeholder="Confirme a Senha"
-              name="confirm-password"
+              name="confirmPassword"
               type="password"
               required
             />

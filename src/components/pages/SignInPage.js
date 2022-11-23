@@ -31,7 +31,12 @@ export default function SignInPage() {
     e.preventDefault();
     setLoading(true);
 
-    axios
+    setTimeout(()=>{
+      console.log(form)
+      setLoading(false)
+    },2000)
+
+/*     axios
       .post("http://localhost:5000/sign-in", form)
       .then((answer) => {
         navigate("/main");
@@ -39,7 +44,7 @@ export default function SignInPage() {
       .catch((err) => {
         alert(err.response.data);
         setLoading(false);
-      });
+      }); */
   }
   return (
     <HomePageBackground>
