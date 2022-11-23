@@ -31,7 +31,12 @@ export default function SignInPage() {
     e.preventDefault();
     setLoading(true);
 
-    axios
+    setTimeout(()=>{
+      console.log(form)
+      setLoading(false)
+    },2000)
+
+/*     axios
       .post("http://localhost:5000/sign-in", form)
       .then((answer) => {
         navigate("/main");
@@ -39,7 +44,7 @@ export default function SignInPage() {
       .catch((err) => {
         alert(err.response.data);
         setLoading(false);
-      });
+      }); */
   }
   return (
     <HomePageBackground>
@@ -101,11 +106,17 @@ const SignInForm = styled.form`
     font-size: 20px;
     font-weight: 400;
     ::placeholder {
-      color: ${colors.purple};
+      color: ${colors.lightPurple};
     }
     :disabled {
       background-color: #f4e5ff;
     }
+  }
+  input:focus {
+    box-sizing: border-box;
+    outline: none !important;
+    border: none;
+    box-shadow: 0 0 10px ${colors.lightPurple};
   }
 `;
 

@@ -3,7 +3,7 @@ import { BsGithub } from "react-icons/bs";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { useTheme, themes } from "../../contexts/Theme";
 
-export default function Sidebar({ sidebar, setSidebar }) {
+export default function Sidebar() {
 
   const { setTheme, theme } = useTheme();
 
@@ -11,7 +11,7 @@ export default function Sidebar({ sidebar, setSidebar }) {
     <>
       {sidebar && (
         <>
-          <OutSideBar onClick={() => setSidebar(false)} />
+          <OutSideBar  />
           <SideBarContent>
             <SwitchThemes color={theme.name === "default" ? "white" : "grey"}>
               <h1>DarkMode</h1>
@@ -56,11 +56,6 @@ export default function Sidebar({ sidebar, setSidebar }) {
             </div>
           </SideBarContent>
         </>
-      )}
-      {!sidebar && (
-        <ClosedSideBar>
-          <BiMenuAltLeft onClick={() => setSidebar(true)} />
-        </ClosedSideBar>
       )}
     </>
   );
