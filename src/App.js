@@ -30,3 +30,8 @@ function App() {
 }
 
 export default App;
+
+//criar página de usuário (na página do admin é possível postar produtos)
+//criar página do carrinho e de confirmação de compra
+//criar balão de atendimento ao cliente (whatsapp)
+//

@@ -5,8 +5,7 @@ import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { useSidebar } from "../../contexts/SidebarContext";
 
 export default function Header() {
-
-  const {setSideBar} = useSidebar()
+  const { setSideBar } = useSidebar();
 
   return (
     <HeaderStyle>
@@ -105,9 +104,10 @@ const Search = styled.div`
 const TitleContainer = styled.div`
   font-family: "Poppins", sans-serif;
   text-align: center;
-  width: 100% > h1 {
-    font-size: 20px;
-    font-weight: 600;
+  width: 100% ;
+  > h1 {
+    font-size: 18px;
+    font-weight: 800;
     color: #1a1d42;
   }
   > h2 {
@@ -122,6 +122,6 @@ const TitleContainer = styled.div`
     margin-top: 2px;
     font-size: 8px;
     color: #7847a1;
-    font-weight: 300;
+    font-weight: 400;
   }
 `;
