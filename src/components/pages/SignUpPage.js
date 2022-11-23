@@ -145,6 +145,12 @@ const SignInForm = styled.form`
       background-color: #f4e5ff;
     }
   }
+  input:focus {
+    box-sizing: border-box;
+    outline: none !important;
+    border: none;
+    box-shadow: 0 0 10px ${colors.lightPurple};
+  }
   > p {
     text-align: left;
     position: absolute;

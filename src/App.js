@@ -5,6 +5,7 @@ import ThemeProvider from "./contexts/Theme";
 import SignInPage from "./components/pages/SignInPage";
 import TokenProvider from "./contexts/Token";
 import SignUpPage from "./components/pages/SignUpPage";
+import ProductsPage from "./components/pages/ProductsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<WelcomePage />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/market" element={<ProductsPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
