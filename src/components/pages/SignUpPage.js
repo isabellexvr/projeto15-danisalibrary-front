@@ -72,14 +72,7 @@ export default function SignUpPage() {
               type="email"
               required
             />
-            <p>*A foto de perfil é opcional</p>
-            <input
-              onChange={handleForm}
-              placeholder="Foto de Perfil (URL)"
-              name="imageURL"
-              type="url"
-              required
-            />
+
             <input
               onChange={handleForm}
               placeholder="Senha"
@@ -93,6 +86,13 @@ export default function SignUpPage() {
               name="confirmPassword"
               type="password"
               required
+            />
+            <p>*A foto de perfil é opcional</p>
+            <input
+              onChange={handleForm}
+              placeholder="Foto de Perfil (URL)"
+              name="imageURL"
+              type="url"
             />
             <SubmitButton color={colors.purple}>Cadastrar-se</SubmitButton>
           </SignInForm>
@@ -148,7 +148,7 @@ const SignInForm = styled.form`
   > p {
     text-align: left;
     position: absolute;
-    bottom: 215px;
+    bottom: 76px;
     font-size: 12px;
     color: red;
   }
@@ -163,7 +163,8 @@ const SubmitButton = styled.button`
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   border: none;
-  margin-bottom: 25px;
+  margin-bottom: 17px;
+  margin-top: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
