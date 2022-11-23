@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { colors } from "../../colors";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
+import { useSidebar } from "../../contexts/SidebarContext";
 
-export default function Header({ setSideBar }) {
+export default function Header() {
+
+  const {setSideBar} = useSidebar()
 
   return (
     <HeaderStyle>

@@ -2,17 +2,21 @@ import styled from "styled-components";
 import { BsGithub } from "react-icons/bs";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { useTheme, themes } from "../../contexts/Theme";
+import { useSidebar } from "../../contexts/SidebarContext";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Sidebar() {
+  const { sideBar, setSideBar } = useSidebar();
 
   const { setTheme, theme } = useTheme();
 
   return (
     <>
-      {sidebar && (
+      {sideBar && (
         <>
-          <OutSideBar  />
+          <OutSideBar onClick={() => setSideBar(false)} />
           <SideBarContent>
+            <GiHamburgerMenu onClick={() => setSideBar(false)} />
             <SwitchThemes color={theme.name === "default" ? "white" : "grey"}>
               <h1>DarkMode</h1>
               <input
@@ -122,6 +126,7 @@ const SideBarContent = styled.div`
   height: 100vh;
   background-color: #b9a8cf;
   position: absolute;
+  top: 0;
   z-index: 1;
   display: flex;
   opacity: 100%;
@@ -154,6 +159,13 @@ const SideBarContent = styled.div`
       }
     }
   }
+  > svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 25px;
+    color: white;
+  }
 `;
 
 const OutSideBar = styled.div`
@@ -161,22 +173,10 @@ const OutSideBar = styled.div`
   height: 100vh;
   background-color: black;
   position: absolute;
+  top: 0;
   right: 0;
   opacity: 0.75;
-`;
-
-const ClosedSideBar = styled.div`
-  width: 13%;
-  height: 100vh;
-  background-color: #b9a8cf;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  > svg {
-    font-size: 35px;
-    color: #1a1d42;
-    margin-top: 10px;
-  }
+  z-index: 1;
 `;
 
 const UserInfo = styled.div`

@@ -6,20 +6,24 @@ import SignInPage from "./components/pages/SignInPage";
 import TokenProvider from "./contexts/Token";
 import SignUpPage from "./components/pages/SignUpPage";
 import ProductsPage from "./components/pages/ProductsPage";
+import SidebarProvider from "./contexts/SidebarContext";
 
 function App() {
   return (
     <TokenProvider>
       <ThemeProvider>
-        <BrowserRouter>
-          <ResetCss />
-          <Routes>
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/market" element={<ProductsPage />} />
-          </Routes>
-        </BrowserRouter>
+        <SidebarProvider>
+          <BrowserRouter>
+            <ResetCss />
+            <Routes>
+              <Route path="/" element={<WelcomePage />} />
+              <Route path="/sign-in" element={<SignInPage />} />
+              <Route path="/sign-up" element={<SignUpPage />} />
+
+              <Route path="/market" element={<ProductsPage />} />
+            </Routes>
+          </BrowserRouter>
+        </SidebarProvider>
       </ThemeProvider>
     </TokenProvider>
   );
