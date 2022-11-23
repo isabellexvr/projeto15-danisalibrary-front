@@ -22,7 +22,6 @@ export default function Sidebar() {
               <input
                 onClick={() => {
                   setTheme(theme.name === "default" ? themes[1] : themes[0]);
-                  console.log("oi");
                 }}
                 type="checkbox"
               ></input>

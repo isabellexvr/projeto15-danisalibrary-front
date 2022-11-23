@@ -13,7 +13,7 @@ export default function WelcomePage() {
       <HomePageBackground>
         <EnterButton
           onClick={() => {
-            navigate("/sign-in");
+            navigate("/sign-up");
           }}
         >
           Tornar-se Cliente

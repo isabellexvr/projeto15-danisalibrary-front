@@ -33,21 +33,19 @@ export default function SignUpPage() {
     setLoading(true);
     if (form.password === form.confirmPassword) {
       delete form.confirmPassword;
-      setTimeout(() => {
-        console.log(form);
-        setLoading(false);
-      }, 2000);
-      /*       axios
+
+      axios
         .post("http://localhost:5000/sign-up", form)
         .then((answer) => {
           alert(answer.data);
+          setLoading(false);
           navigate("/sign-in");
         })
         .catch((err) => {
           console.log(err.response.data);
           alert(err.response.data);
           setLoading(false);
-        }); */
+        });
     } else {
       alert("As senhas não coindidem.");
       setLoading(false);
