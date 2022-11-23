@@ -33,11 +33,11 @@ export default function SignUpPage() {
     setLoading(true);
     if (form.password === form.confirmPassword) {
       delete form.confirmPassword;
-      setTimeout(()=>{
-        console.log(form)
-        setLoading(false)
-      },2000)
-/*       axios
+      setTimeout(() => {
+        console.log(form);
+        setLoading(false);
+      }, 2000);
+      /*       axios
         .post("http://localhost:5000/sign-up", form)
         .then((answer) => {
           alert(answer.data);
@@ -61,7 +61,7 @@ export default function SignUpPage() {
             <input
               onChange={handleForm}
               placeholder="Nome"
-              name="nome"
+              name="name"
               type="text"
               required
             />
@@ -70,6 +70,14 @@ export default function SignUpPage() {
               placeholder="E-mail"
               name="email"
               type="email"
+              required
+            />
+            <p>*A foto de perfil é opcional</p>
+            <input
+              onChange={handleForm}
+              placeholder="Foto de Perfil (URL)"
+              name="imageURL"
+              type="url"
               required
             />
             <input
@@ -98,6 +106,7 @@ export default function SignUpPage() {
           <SignInForm disabled>
             <input placeholder="Nome" disabled />
             <input placeholder="E-mail" disabled />
+            <input placeholder="Foto de Perfil (URL)" disabled />
             <input placeholder="Senha" disabled />
             <input placeholder="Confirme a Senha" disabled />
             <SubmitButton disabled color={colors.lightPurple}>
@@ -114,6 +123,7 @@ export default function SignUpPage() {
 }
 
 const SignInForm = styled.form`
+  position: relative;
   width: 85%;
   display: flex;
   flex-direction: column;
@@ -134,6 +144,13 @@ const SignInForm = styled.form`
     :disabled {
       background-color: #f4e5ff;
     }
+  }
+  > p {
+    text-align: left;
+    position: absolute;
+    bottom: 215px;
+    font-size: 12px;
+    color: red;
   }
 `;
 
