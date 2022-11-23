@@ -101,7 +101,7 @@ const SignInForm = styled.form`
     font-size: 20px;
     font-weight: 400;
     ::placeholder {
-      color: ${colors.purple};
+      color: ${colors.lightPurple};
     }
     :disabled {
       background-color: #f4e5ff;

@@ -4,6 +4,7 @@ import WelcomePage from "./components/pages/WelcomePage";
 import ThemeProvider from "./contexts/Theme";
 import SignInPage from "./components/pages/SignInPage";
 import TokenProvider from "./contexts/Token";
+import SignUpPage from "./components/pages/SignUpPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
