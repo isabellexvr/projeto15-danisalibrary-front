@@ -148,6 +148,7 @@ const SideBarContent = styled.div`
   background-color: #b9a8cf;
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 1;
   display: flex;
   opacity: 100%;
