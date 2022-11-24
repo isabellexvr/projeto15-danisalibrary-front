@@ -41,7 +41,7 @@ export default function SignInPage() {
         localStorage.setItem("data", serialized);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response);
         setLoading(false);
       });
   }

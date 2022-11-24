@@ -5,8 +5,6 @@ import { useState } from "react";
 
 export default function ProductsPage() {
 
-
-
   return (
     <PageStyle>
       <Header />

@@ -12,6 +12,7 @@ export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
+
   const {token} = useToken()
 
   return (
@@ -40,8 +41,8 @@ export default function Sidebar() {
                   const isLogged = localStorage.getItem("data");
                   axios
                     .delete(`http://localhost:5000/logout/${token}`)
-                    .then((answer) => console.log(answer))
-                    .catch((err) => console.log(err));
+                    .then((answer) => console.log(answer.data))
+                    .catch((err) => console.log(err.data));
                   console.log(JSON.parse(isLogged));
                   localStorage.removeItem("data");
                   navigate("/");
