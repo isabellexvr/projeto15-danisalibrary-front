@@ -37,13 +37,16 @@ const HeaderStyle = styled.div`
   width: 100%;
   height: 17vh;
   background-color: ${colors.pastelLightPurple};
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const Top = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   height: 11vh;
   width: 100%;
   > svg {
@@ -60,7 +63,7 @@ const Top = styled.div`
     }
   }
   > div:last-child {
-    width: 19%;
+    width: 16%;
     display: flex;
     justify-content: space-between;
   }
@@ -104,7 +107,8 @@ const Search = styled.div`
 const TitleContainer = styled.div`
   font-family: "Poppins", sans-serif;
   text-align: center;
-  width: 100% ;
+  width: 50%;
+  cursor: pointer;
   > h1 {
     font-size: 18px;
     font-weight: 800;
