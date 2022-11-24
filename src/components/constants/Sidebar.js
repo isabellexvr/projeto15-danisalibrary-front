@@ -54,7 +54,7 @@ export default function Sidebar() {
                     >
                       <BsGithub />
                     </a>
-                    <h2>dcaaz</h2>
+                    <h2>isabellexvr</h2>
                   </div>
                   <div className="dev">
                     <a
@@ -64,7 +64,7 @@ export default function Sidebar() {
                     >
                       <BsGithub />
                     </a>
-                    <h2>daniele</h2>
+                    <h2>dcaaz</h2>
                   </div>
                 </div>
               </div>
