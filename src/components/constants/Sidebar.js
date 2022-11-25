@@ -5,7 +5,7 @@ import { useTheme, themes } from "../../contexts/Theme";
 
 export default function Sidebar() {
 
-  const { setTheme, theme } = useTheme();
+/*  const { setTheme, theme } = useTheme();
 
   return (
     <>
@@ -58,7 +58,7 @@ export default function Sidebar() {
         </>
       )}
     </>
-  );
+  ); */
 }
 
 const SwitchThemes = styled.div`
