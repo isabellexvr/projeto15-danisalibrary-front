@@ -5,11 +5,15 @@ import { useTheme, themes } from "../../contexts/Theme";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useToken } from "../../contexts/Token";
 
 export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
+
+  const {token} = useToken()
 
   return (
     <>
@@ -34,6 +38,12 @@ export default function Sidebar() {
             <UserInfo>
               <LogOut
                 onClick={() => {
+                  const isLogged = localStorage.getItem("data");
+                  axios
+                    .delete(`http://localhost:5000/logout/${token}`)
+                    .then((answer) => console.log(answer.data))
+                    .catch((err) => console.log(err.data));
+                  console.log(JSON.parse(isLogged));
                   localStorage.removeItem("data");
                   navigate("/");
                 }}
@@ -54,7 +64,7 @@ export default function Sidebar() {
                     >
                       <BsGithub />
                     </a>
-                    <h2>dcaaz</h2>
+                    <h2>isabellexvr</h2>
                   </div>
                   <div className="dev">
                     <a
@@ -64,7 +74,7 @@ export default function Sidebar() {
                     >
                       <BsGithub />
                     </a>
-                    <h2>daniele</h2>
+                    <h2>dcaaz</h2>
                   </div>
                 </div>
               </div>
@@ -138,6 +148,7 @@ const SideBarContent = styled.div`
   background-color: #b9a8cf;
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 1;
   display: flex;
   opacity: 100%;
