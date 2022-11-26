@@ -13,7 +13,7 @@ export default function Header() {
     <HeaderStyle>
       <Top>
         <GiHamburgerMenu onClick={() => setSideBar(true)} />
-        <TitleContainer>
+        <TitleContainer onClick={()=> navigate("/market")}>
           <h1>LIBRARY</h1>
           <h2>
             DAN<strong>I</strong>SA

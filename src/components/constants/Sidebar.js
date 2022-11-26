@@ -8,12 +8,29 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserInfo } from "../../contexts/UserInfo";
 
+const categories = [
+  "fantasia",
+  "sci-fi",
+  "biografia",
+  "poesia",
+  "romance",
+  "drama",
+  "ficção",
+  "aventura",
+  "HQ",
+  "infantil",
+  "nacional",
+  "terror",
+  "jovem",
+  "erótico",
+  "comédia",
+];
+
 export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
-
-  const {userInfo} = useUserInfo()
+  const { userInfo } = useUserInfo();
 
   return (
     <>
@@ -36,6 +53,21 @@ export default function Sidebar() {
             </SwitchThemes>
 
             <UserInfo>
+              <Categories>
+                <div className="title">
+                  <h1>CATEGORIAS</h1>
+                </div>
+                <div>
+                  {categories.map((categorie) => (
+                    <div
+                    onClick={()=> {
+                      setSideBar(false);
+                      navigate(`/market/${categorie}`);
+                    }}
+                    >{categorie}</div>
+                  ))}
+                </div>
+              </Categories>
               <LogOut
                 onClick={() => {
                   const isLogged = localStorage.getItem("data");
@@ -206,6 +238,10 @@ const UserInfo = styled.div`
   width: 90%;
   height: 100vw;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 const LogOut = styled.div`
@@ -224,5 +260,34 @@ const LogOut = styled.div`
   }
   > svg {
     font-size: 30px;
+  }
+`;
+
+const Categories = styled.div`
+  background-color: #604d79;
+  width: 90%;
+  height: 27vh;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > div {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-family: "Poppins", sans-serif;
+    font-size: 17px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+  }
+  >div:last-child{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    >div{
+      margin: 7px;
+      text-decoration: underline;
+      font-size: 14px;
+    }
   }
 `;

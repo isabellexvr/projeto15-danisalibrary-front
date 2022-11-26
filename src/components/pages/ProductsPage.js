@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import Header from "../constants/Header";
 import Sidebar from "../constants/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { colors } from "../../colors";
+import axios from "axios";
 
 const books = [
   {
@@ -33,6 +34,12 @@ const books = [
 ];
 
 export default function ProductsPage() {
+
+  useEffect((()=>{
+    axios.get("http://localhost:5000/get-products")
+    .then((answer)=> console.log(answer.data))
+    .catch(err => console.log(err))
+  }),[])
   return (
     <PageStyle>
       <Header />

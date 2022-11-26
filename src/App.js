@@ -8,6 +8,7 @@ import SignUpPage from "./components/pages/SignUpPage";
 import ProductsPage from "./components/pages/ProductsPage";
 import SidebarProvider from "./contexts/SidebarContext";
 import UserPage from "./components/pages/UserPage";
+import CategoryPage from "./components/pages/CategoryPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/sign-up" element={<SignUpPage />} />
               <Route path="/user" element={<UserPage />} />
               <Route path="/market" element={<ProductsPage />} />
+              <Route path="/market/:category" element={<CategoryPage />} />
             </Routes>
           </BrowserRouter>
         </SidebarProvider>
