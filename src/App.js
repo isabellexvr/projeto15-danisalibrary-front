@@ -3,13 +3,13 @@ import { ResetCss } from "./ResetCss";
 import WelcomePage from "./components/pages/WelcomePage";
 import ThemeProvider from "./contexts/Theme";
 import SignInPage from "./components/pages/SignInPage";
-import TokenProvider from "./contexts/Token";
+import AuthProvider from "./contexts/Ayth";
 import SignUpPage from "./components/pages/SignUpPage";
 import ProductsPage from "./components/pages/ProductsPage";
 
 function App() {
   return (
-    <TokenProvider>
+    <AuthProvider>
       <ThemeProvider>
         <BrowserRouter>
           <ResetCss />
@@ -21,7 +21,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
-    </TokenProvider>
+    </AuthProvider>
   );
 }
 

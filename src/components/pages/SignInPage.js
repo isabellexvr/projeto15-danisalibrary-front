@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToken } from "../../contexts/Token";
+import { useToken, AuthContext } from "../../contexts/Ayth";
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -14,6 +14,7 @@ export default function SignInPage() {
   const [form, setForm] = useState({});
 
   const { setToken } = useToken();
+  const { setName, setImagemURL } = useContext(AuthContext);
 
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
