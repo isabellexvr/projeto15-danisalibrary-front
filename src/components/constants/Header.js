@@ -3,9 +3,11 @@ import { colors } from "../../colors";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { useSidebar } from "../../contexts/SidebarContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { setSideBar } = useSidebar();
+  const navigate = useNavigate();
 
   return (
     <HeaderStyle>
@@ -19,7 +21,9 @@ export default function Header() {
           <h3>THE BEST WAY TO BOOK</h3>
         </TitleContainer>
         <div>
-          <FaUserAlt />
+          <FaUserAlt  onClick={() => {
+            navigate("/user");
+          }} />
           <FaShoppingCart />
         </div>
       </Top>

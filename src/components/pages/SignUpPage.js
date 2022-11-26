@@ -108,7 +108,7 @@ export default function SignUpPage() {
             <input placeholder="Senha" disabled />
             <input placeholder="Confirme a Senha" disabled />
             <SubmitButton disabled color={colors.lightPurple}>
-              <PropagateLoader color="white" size={8} />
+              <PropagateLoader color="#FFFFFF" size={8} />
             </SubmitButton>
           </SignInForm>
           <StyledLink to="sign-up" disabled>
@@ -163,9 +163,7 @@ const SubmitButton = styled.button`
   width: 100%;
   height: 46px;
   border-radius: 5px;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  color: #FFFFFF;
   border: none;
   margin-bottom: 17px;
   margin-top: 14px;
@@ -173,6 +171,7 @@ const SubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -194,6 +193,6 @@ const StyledLink = styled(Link)`
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
 `;
