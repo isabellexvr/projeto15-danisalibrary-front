@@ -38,7 +38,7 @@ export default function SignUpPage() {
         setLoading(false);
       }, 2000);
            axios
-        .post("http://localhost:5000/sign-up", form)
+        .post("https://danisalibrary.onrender.com/sign-up", form)
         .then((answer) => {
           alert(answer.data);
           navigate("/sign-in");
