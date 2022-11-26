@@ -6,14 +6,14 @@ import { useSidebar } from "../../contexts/SidebarContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToken } from "../../contexts/Token";
+import { useUserInfo } from "../../contexts/UserInfo";
 
 export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
 
-  const {token} = useToken()
+  const {userInfo} = useUserInfo()
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function Sidebar() {
                 onClick={() => {
                   const isLogged = localStorage.getItem("data");
                   axios
-                    .delete(`http://localhost:5000/logout/${token}`)
+                    .delete(`http://localhost:5000/logout/${userInfo.token}`)
                     .then((answer) => console.log(answer.data))
                     .catch((err) => console.log(err.data));
                   console.log(JSON.parse(isLogged));

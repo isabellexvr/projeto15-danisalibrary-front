@@ -3,7 +3,7 @@ import { ResetCss } from "./ResetCss";
 import WelcomePage from "./components/pages/WelcomePage";
 import ThemeProvider from "./contexts/Theme";
 import SignInPage from "./components/pages/SignInPage";
-import TokenProvider from "./contexts/Token";
+import UserInfoProvider from "./contexts/UserInfo";
 import SignUpPage from "./components/pages/SignUpPage";
 import ProductsPage from "./components/pages/ProductsPage";
 import SidebarProvider from "./contexts/SidebarContext";
@@ -11,7 +11,7 @@ import UserPage from "./components/pages/UserPage";
 
 function App() {
   return (
-    <TokenProvider>
+    <UserInfoProvider>
       <ThemeProvider>
         <SidebarProvider>
           <BrowserRouter>
@@ -26,7 +26,7 @@ function App() {
           </BrowserRouter>
         </SidebarProvider>
       </ThemeProvider>
-    </TokenProvider>
+    </UserInfoProvider>
   );
 }
 

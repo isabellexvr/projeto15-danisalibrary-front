@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToken } from "../../contexts/Token";
+import { useUserInfo } from "../../contexts/UserInfo";
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -13,12 +13,12 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
 
-  const { setToken } = useToken();
+  const { setUserInfo } = useUserInfo();
 
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
     const data = JSON.parse(isLogged);
-    setToken(data.token);
+    setUserInfo(data);
     navigate("/market");
     return;
   }
@@ -36,7 +36,7 @@ export default function SignInPage() {
       .then((answer) => {
         navigate("/market");
         console.log(answer);
-        setToken(answer.data.token);
+        setUserInfo(answer.data);
         const serialized = JSON.stringify(answer.data);
         localStorage.setItem("data", serialized);
       })

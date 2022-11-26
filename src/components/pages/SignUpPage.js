@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToken } from "../../contexts/Token";
+import { useUserInfo } from "../../contexts/UserInfo";
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -13,12 +13,12 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
 
-  const { setToken } = useToken();
+  const { setUserInfo } = useUserInfo();
 
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
     const data = JSON.parse(isLogged);
-    setToken(data.token);
+    setUserInfo(data);
     navigate("/main");
     return;
   }
