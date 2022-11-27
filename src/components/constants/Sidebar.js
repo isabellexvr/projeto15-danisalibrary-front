@@ -24,6 +24,11 @@ const categories = [
   "jovem",
   "erótico",
   "comédia",
+  "distopia",
+  "utopia",
+  "diário",
+  "educação",
+  "autoajuda",
 ];
 
 export default function Sidebar() {
@@ -60,11 +65,13 @@ export default function Sidebar() {
                 <div>
                   {categories.map((categorie) => (
                     <div
-                    onClick={()=> {
-                      setSideBar(false);
-                      navigate(`/market/${categorie}`);
-                    }}
-                    >{categorie}</div>
+                      onClick={() => {
+                        setSideBar(false);
+                        navigate(`/market/${categorie}`);
+                      }}
+                    >
+                      {categorie}
+                    </div>
                   ))}
                 </div>
               </Categories>
@@ -73,9 +80,9 @@ export default function Sidebar() {
                   const isLogged = localStorage.getItem("data");
                   const config = {
                     headers: {
-                        Authorization: `Bearer ${userInfo.token}`
-                    }
-                }
+                      Authorization: `Bearer ${userInfo.token}`,
+                    },
+                  };
                   axios
                     .delete(`https://danisalibrary.onrender.com/logout`, config)
                     .then((answer) => console.log(answer.data))
@@ -286,11 +293,11 @@ const Categories = styled.div`
     color: white;
     font-weight: 600;
   }
-  >div:last-child{
+  > div:last-child {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    >div{
+    > div {
       margin: 7px;
       text-decoration: underline;
       font-size: 14px;
