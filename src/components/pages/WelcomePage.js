@@ -4,19 +4,36 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import HomePageBackground from "../constants/HomePageBackground";
 import { colors } from "../../colors";
+import { useUserInfo } from "../../contexts/UserInfo";
 
 export default function WelcomePage() {
   const navigate = useNavigate();
+  const { setUserInfo } = useUserInfo();
+
+  const isLogged = localStorage.getItem("data");
+  if (isLogged) {
+    const data = JSON.parse(isLogged);
+    setUserInfo(data);
+    navigate("/market");
+    return;
+  }
 
   return (
     <ThemeContainer>
       <HomePageBackground>
         <EnterButton
           onClick={() => {
-            navigate("/sign-in");
+            navigate("/sign-up");
           }}
         >
           Tornar-se Cliente
+        </EnterButton>
+        <EnterButton
+          onClick={() => {
+            navigate("/sign-in");
+          }}
+        >
+          Já sou Cliente
         </EnterButton>
         <EnterWithoutAccount to="/market">
           Não quero ser cliente por agora
@@ -35,7 +52,7 @@ const EnterButton = styled.button`
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   border: none;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,4 +69,5 @@ const EnterWithoutAccount = styled(Link)`
   font-size: 15px;
   color: white;
   text-decoration: none;
+  margin-top: 10px;
 `;

@@ -2,14 +2,18 @@ import styled from "styled-components";
 import { colors } from "../../colors";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
+import { useSidebar } from "../../contexts/SidebarContext";
+import { useNavigate } from "react-router-dom";
 
-export default function Header({ setSideBar }) {
+export default function Header() {
+  const { setSideBar } = useSidebar();
+  const navigate = useNavigate();
 
   return (
     <HeaderStyle>
       <Top>
         <GiHamburgerMenu onClick={() => setSideBar(true)} />
-        <TitleContainer>
+        <TitleContainer onClick={()=> navigate("/market")}>
           <h1>LIBRARY</h1>
           <h2>
             DAN<strong>I</strong>SA
@@ -17,7 +21,9 @@ export default function Header({ setSideBar }) {
           <h3>THE BEST WAY TO BOOK</h3>
         </TitleContainer>
         <div>
-          <FaUserAlt />
+          <FaUserAlt  onClick={() => {
+            navigate("/user");
+          }} />
           <FaShoppingCart />
         </div>
       </Top>
@@ -35,13 +41,16 @@ const HeaderStyle = styled.div`
   width: 100%;
   height: 17vh;
   background-color: ${colors.pastelLightPurple};
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const Top = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   height: 11vh;
   width: 100%;
   > svg {
@@ -58,7 +67,7 @@ const Top = styled.div`
     }
   }
   > div:last-child {
-    width: 19%;
+    width: 16%;
     display: flex;
     justify-content: space-between;
   }
@@ -102,9 +111,11 @@ const Search = styled.div`
 const TitleContainer = styled.div`
   font-family: "Poppins", sans-serif;
   text-align: center;
-  width: 100% > h1 {
-    font-size: 20px;
-    font-weight: 600;
+  width: 50%;
+  cursor: pointer;
+  > h1 {
+    font-size: 18px;
+    font-weight: 800;
     color: #1a1d42;
   }
   > h2 {
@@ -119,6 +130,6 @@ const TitleContainer = styled.div`
     margin-top: 2px;
     font-size: 8px;
     color: #7847a1;
-    font-weight: 300;
+    font-weight: 400;
   }
 `;

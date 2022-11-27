@@ -3,7 +3,8 @@ import { useContext, useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToken, AuthContext } from "../../contexts/Ayth";
+import { useUserInfo } from "../../contexts/UserInfo";
+
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -13,14 +14,13 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
 
-  const { setToken } = useToken();
-  const { setName, setImagemURL } = useContext(AuthContext);
+  const { setUserInfo } = useUserInfo();
 
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
     const data = JSON.parse(isLogged);
-    setToken(data.token);
-    navigate("/main");
+    setUserInfo(data);
+    navigate("/market");
     return;
   }
 
@@ -32,18 +32,18 @@ export default function SignInPage() {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(()=>{
-      console.log(form)
-      setLoading(false)
-    },2000)
-
     axios
-      .post("https://danisalibrary.onrender.com/sign-in", form)
+      .post("http://localhost:5000/sign-in", form)
+
       .then((answer) => {
-        navigate("/main");
+        navigate("/market");
+        console.log(answer);
+        setUserInfo(answer.data);
+        const serialized = JSON.stringify(answer.data);
+        localStorage.setItem("data", serialized);
       })
       .catch((err) => {
-        alert(err.response.data);
+        console.log(err.response.data.message);
         setLoading(false);
       });
   }

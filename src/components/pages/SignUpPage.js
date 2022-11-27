@@ -3,7 +3,9 @@ import { useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToken } from "../../contexts/Ayth";
+
+import { useUserInfo } from "../../contexts/UserInfo";
+
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -13,12 +15,12 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
 
-  const { setToken } = useToken();
+  const { setUserInfo } = useUserInfo();
 
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
     const data = JSON.parse(isLogged);
-    setToken(data.token);
+    setUserInfo(data);
     navigate("/main");
     return;
   }
@@ -33,14 +35,13 @@ export default function SignUpPage() {
     setLoading(true);
     if (form.password === form.confirmPassword) {
       delete form.confirmPassword;
-      setTimeout(() => {
-        console.log(form);
-        setLoading(false);
-      }, 2000);
-           axios
-        .post("https://danisalibrary.onrender.com/sign-up", form)
+
+      axios
+        .post("http://localhost:5000/sign-up", form)
+
         .then((answer) => {
           alert(answer.data);
+          setLoading(false);
           navigate("/sign-in");
         })
         .catch((err) => {
@@ -110,7 +111,7 @@ export default function SignUpPage() {
             <input placeholder="Senha" disabled />
             <input placeholder="Confirme a Senha" disabled />
             <SubmitButton disabled color={colors.lightPurple}>
-              <PropagateLoader color="white" size={8} />
+              <PropagateLoader color="#FFFFFF" size={8} />
             </SubmitButton>
           </SignInForm>
           <StyledLink to="sign-up" disabled>
@@ -165,9 +166,7 @@ const SubmitButton = styled.button`
   width: 100%;
   height: 46px;
   border-radius: 5px;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  color: #FFFFFF;
   border: none;
   margin-bottom: 17px;
   margin-top: 14px;
@@ -175,6 +174,7 @@ const SubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -196,6 +196,6 @@ const StyledLink = styled(Link)`
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
 `;
