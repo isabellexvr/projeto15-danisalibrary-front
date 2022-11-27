@@ -12,7 +12,7 @@ export default function CategoryPage() {
       .get(`http://localhost:5000/get-products/${category}`)
       .then((answer) => console.log(answer.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [category]);
   return (
     <>
       <Header />

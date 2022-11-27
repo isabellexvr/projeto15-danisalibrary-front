@@ -12,7 +12,7 @@ const books = [
     price: "R$29,99",
   },
   {
-    title: "Percy Jackson & Os Olimpianos: O Mar de Monstros",
+    title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
     imageURL: "https://m.media-amazon.com/images/I/91c3vlY3PvL.jpg",
     price: "R$29,99",
   },

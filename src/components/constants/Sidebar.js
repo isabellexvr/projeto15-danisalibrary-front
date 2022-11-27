@@ -55,7 +55,7 @@ export default function Sidebar() {
             <UserInfo>
               <Categories>
                 <div className="title">
-                  <h1>CATEGORIAS</h1>
+                  <h1>NAVEGAR POR CATEGORIAS</h1>
                 </div>
                 <div>
                   {categories.map((categorie) => (
@@ -275,7 +275,7 @@ const Categories = styled.div`
     margin-top: 10px;
     margin-bottom: 5px;
     font-family: "Poppins", sans-serif;
-    font-size: 17px;
+    font-size: 15px;
     text-align: center;
     color: white;
     font-weight: 600;
@@ -288,6 +288,7 @@ const Categories = styled.div`
       margin: 7px;
       text-decoration: underline;
       font-size: 14px;
+      font-weight: 400;
     }
   }
 `;
