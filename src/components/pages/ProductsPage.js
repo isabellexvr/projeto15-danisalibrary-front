@@ -36,7 +36,7 @@ const books = [
 export default function ProductsPage() {
 
   useEffect((()=>{
-    axios.get("http://localhost:5000/get-products")
+    axios.get("https://danisalibrary.onrender.com/get-products")
     .then((answer)=> console.log(answer.data))
     .catch(err => console.log(err))
   }),[])

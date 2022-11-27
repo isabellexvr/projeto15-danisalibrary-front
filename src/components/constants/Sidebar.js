@@ -32,6 +32,7 @@ export default function Sidebar() {
   const { setTheme, theme } = useTheme();
   const { userInfo } = useUserInfo();
 
+  console.log("userinfo", userInfo)
 
   return (
     <>
@@ -72,8 +73,13 @@ export default function Sidebar() {
               <LogOut
                 onClick={() => {
                   const isLogged = localStorage.getItem("data");
+                  const config = {
+                    headers: {
+                        Authorization: `Bearer ${userInfo.token}`
+                    }
+                }
                   axios
-                    .delete(`http://localhost:5000/logout/${userInfo.token}`)
+                    .delete(`https://danisalibrary.onrender.com/logout`, config)
                     .then((answer) => console.log(answer.data))
                     .catch((err) => console.log(err.data));
                   console.log(JSON.parse(isLogged));
@@ -116,7 +122,7 @@ export default function Sidebar() {
         </>
       )}
     </>
-  ); */
+  );
 }
 
 const SwitchThemes = styled.div`

@@ -14,11 +14,12 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
 
-  const { setUserInfo } = useUserInfo();
+  const { setUserInfo, } = useUserInfo();
 
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
     const data = JSON.parse(isLogged);
+    console.log("dados", data)
     setUserInfo(data);
     navigate("/market");
     return;
@@ -33,8 +34,7 @@ export default function SignInPage() {
     setLoading(true);
 
     axios
-      .post("http://localhost:5000/sign-in", form)
-
+      .post("https://danisalibrary.onrender.com/sign-in", form)
       .then((answer) => {
         navigate("/market");
         console.log(answer);

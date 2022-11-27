@@ -3,21 +3,72 @@ import styled from "styled-components";
 import { colors } from "../../colors";
 import Header from "../constants/Header";
 import Sidebar from "../constants/Sidebar";
-import { Link } from "react-router-dom";
-// import { useToken } from "../../contexts/Token";
+import { Link, useNavigate } from "react-router-dom";
+import { FaPencilAlt } from "react-icons/fa";
+import { useUserInfo } from "../../contexts/UserInfo";
+import axios from "axios";
 
 export default function UserPage() {
 
     const [nameRegistration, setNameRegistration] = useState("");
     const [photografy, setPhotografy] = useState("");
-    // const [zipCode, setZipCode] = useState("");
-    const [desabilitar, setDesabilitar] = useState(false);
-    //    const navigate = useNavigate();
+    const [enableName, setEnableName] = useState(true);
+    const [enablePhoto, setEnablePhoto] = useState(true);
+    const [enable, setEnable] = useState(true);
+    
+    const { userInfo } = useUserInfo();
+    const navigate = useNavigate();
+    console.log("userInfo", userInfo);
 
-    //    const { setToken } = useToken();
+    function habilitae(param) {
 
-    function chanceData() {
+        setEnable(false);
 
+        if (param === "photo"){
+            setEnablePhoto(false);
+        } else {
+            setEnableName(false);
+        }
+    }
+
+    function chanceData(e) {
+        e.preventDefault();
+        
+        setEnableName(true);
+        setEnablePhoto(true);
+        setEnable(true);
+
+        const {token} = userInfo
+        console.log("token", token)
+
+        const URL = "https://danisalibrary.onrender.com/change-data";
+
+        const body = {
+            name: nameRegistration,
+            imageURL: photografy
+        }
+
+        console.log("body user", body)
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const promise = axios.post(URL, body, config);
+
+        promise.then((res) => {
+            console.log("res user", res)
+            alert("Dados alterados");
+            navigate("/market");
+        })
+
+        promise.catch((erro) => {
+            console.log("erro pagina de user", erro.response);
+            alert(erro.response.data);
+            setEnable(false);
+        })
     }
 
     return (
@@ -27,25 +78,31 @@ export default function UserPage() {
             <Inputs>
                 <h2>Altere ou insira seus dados</h2>
                 <form onSubmit={chanceData}>
-                    <Input>
-                        <input
-                            type="text"
-                            placeholder="Nome"
-                            onChange={(e) => setNameRegistration(e.target.value)}
-                            value={nameRegistration}
-                            disabled={desabilitar}
-                        />
-                    </Input>
+                    <Teste>
+                        <Input>
+                            <input
+                                type="text"
+                                placeholder="Nome"
+                                onChange={(e) => setNameRegistration(e.target.value)}
+                                value={nameRegistration}
+                                disabled={enableName}
+                            />
+                        </Input>
+                        <FaPencilAlt onClick={() => habilitae("name")} />
+                    </Teste>
+                    <Teste>
                     <Input>
                         <input
                             type="text"
                             placeholder="Foto"
                             onChange={(e) => setPhotografy(e.target.value)}
                             value={photografy}
-                            disabled={desabilitar}
+                            disabled={enablePhoto}
                         />
                     </Input>
-                   {/* <Input>
+                    <FaPencilAlt onClick={() => habilitae("photo")} />
+                    </Teste>
+                    {/* <Input>
                         <input
                             type="text"
                             placeholder="Endereço"
@@ -57,7 +114,7 @@ export default function UserPage() {
                     <Button color={colors.purple}>
                         <button
                             type="submit"
-                            disabled={desabilitar}>
+                            disabled={enable}>
                             <h1>Alterar dados</h1>
                         </button>
                     </Button>
@@ -99,7 +156,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 input {
-    width: 100%;
+    width: 90%;
     height: 58px;
     margin-bottom: 13px;
     border-radius: 5px;
@@ -147,5 +204,15 @@ const StyledLink = styled(Link)`
   font-size: 15px;
   color:  #7847a1;
   text-decoration: none;
+`;
+
+const Teste = styled.div`
+  display: flex;
+  svg{
+    margin-top: 20px;
+    color: #7847a1;
+    font-size: 20px;
+  }
+
 `;
 
