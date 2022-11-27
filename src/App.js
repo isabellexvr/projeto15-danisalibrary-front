@@ -10,7 +10,7 @@ import ProductsPage from "./components/pages/ProductsPage";
 import SidebarProvider from "./contexts/SidebarContext";
 import UserPage from "./components/pages/UserPage";
 import CategoryPage from "./components/pages/CategoryPage";
-import AuthProvider from "./contexts/Ayth";
+import AuthProvider from "./contexts/Cart";
 
 
 function App() {

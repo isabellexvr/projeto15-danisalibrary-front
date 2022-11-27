@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../constants/Header";
 import Sidebar from "../constants/Sidebar";
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/Ayth";
+import { AuthContext } from "../../contexts/Cart";
 
 
 export default function CartPage() {
