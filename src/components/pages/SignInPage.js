@@ -21,6 +21,7 @@ export default function SignInPage() {
     const data = JSON.parse(isLogged);
     console.log("dados", data)
     setUserInfo(data);
+    console.log("set", setUserInfo)
     navigate("/market");
     return;
   }

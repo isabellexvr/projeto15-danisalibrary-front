@@ -32,8 +32,6 @@ export default function Sidebar() {
   const { setTheme, theme } = useTheme();
   const { userInfo } = useUserInfo();
 
-  console.log("userinfo", userInfo)
-
   return (
     <>
       {sideBar && (
@@ -85,6 +83,7 @@ export default function Sidebar() {
                   console.log(JSON.parse(isLogged));
                   localStorage.removeItem("data");
                   navigate("/");
+                  setSideBar(false);
                 }}
               >
                 <BiLogOut />
