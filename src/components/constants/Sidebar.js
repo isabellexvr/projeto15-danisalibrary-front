@@ -82,8 +82,8 @@ export default function Sidebar() {
                     .catch((err) => console.log(err.data));
                   console.log(JSON.parse(isLogged));
                   localStorage.removeItem("data");
-                  navigate("/");
                   setSideBar(false);
+                  navigate("/");
                 }}
               >
                 <BiLogOut />

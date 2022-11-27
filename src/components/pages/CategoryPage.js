@@ -13,6 +13,7 @@ export default function CategoryPage() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
+
   useEffect(() => {
     axios
       .get(`https://danisalibrary.onrender.com/get-products/${category}`)

@@ -21,10 +21,12 @@ export default function Header() {
           <h3>THE BEST WAY TO BOOK</h3>
         </TitleContainer>
         <div>
-          <FaUserAlt  onClick={() => {
+          <FaUserAlt onClick={() => {
             navigate("/user");
           }} />
-          <FaShoppingCart />
+          <FaShoppingCart onClick={() => {
+            navigate("/cart");
+          }}/>
         </div>
       </Top>
       <HorizontalLine />

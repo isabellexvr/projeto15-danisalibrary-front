@@ -1,23 +1,38 @@
 import styled from "styled-components";
 import Header from "../constants/Header";
 import Sidebar from "../constants/Sidebar";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { colors } from "../../colors";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
+
 
 export default function ProductsPage() {
 const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
-  useEffect((()=>{
+  const { setCart, cart } = useContext(AuthContext);
+
+  useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
     .then((answer)=> {
       setProducts(answer.data)
       console.log(answer.data)})
-    .catch(err => console.log(err))
-  }),[])
+      .catch(err => console.log(err))
+  }), [products])
 
+  function addItemCart(prod) {
+    const exist = cart.some((book) => book.id === prod.id)
+    if (exist) {
+      alert("Este livro já está no seu carrinho :)")
+    } else {
+      const newBook = [...cart, prod];
+      console.log("livros", newBook);
+      setCart(newBook);
+    }
+  }
 
   return (
     <PageStyle>
@@ -34,7 +49,7 @@ const navigate = useNavigate();
                   <h1>{book.title}</h1>
                   <h2>{book.price}</h2>
                 </Info>
-                <button>Comprar</button>
+                <button onClick={() => addItemCart(book)}>Comprar</button>
               </Product>
             ))}
           </HighlightProducts>
