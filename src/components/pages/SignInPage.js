@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserInfo } from "../../contexts/UserInfo";
+
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -33,7 +34,12 @@ export default function SignInPage() {
     setLoading(true);
 
     axios
+<<<<<<< HEAD
       .post("https://danisalibrary.onrender.com/sign-in", form)
+=======
+      .post("http://localhost:5000/sign-in", form)
+
+>>>>>>> 72f1800af43afab38be1fe880558e8724a5ade4e
       .then((answer) => {
         navigate("/market");
         console.log(answer);
