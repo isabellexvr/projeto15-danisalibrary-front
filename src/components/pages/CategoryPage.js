@@ -110,6 +110,7 @@ const ProductStyle = styled.div`
   padding: 5px;
   padding-top: 10px;
   border-radius: 10px;
+  margin-bottom: 15px;
   > button {
     margin-top: 10px;
     margin-bottom: 10px;
