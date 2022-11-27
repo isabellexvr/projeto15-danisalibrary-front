@@ -11,21 +11,24 @@ import { useState } from "react";
 
 
 export default function ProductsPage() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
 
-  const { setCart, cart } = useContext(AuthContext);
+  const { setCart, cart, counter, setCounter } = useContext(AuthContext);
 
   useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
-    .then((answer)=> {
-      setProducts(answer.data)
-      console.log(answer.data)})
+      .then((answer) => {
+        setProducts(answer.data)
+      })
       .catch(err => console.log(err))
   }), [products])
 
   function addItemCart(prod) {
-    const exist = cart.some((book) => book.id === prod.id)
+    console.log("prod", prod);
+    setCounter(counter + 1)
+    const exist = cart.some((book) => book._id === prod._id)
     if (exist) {
       alert("Este livro já está no seu carrinho :)")
     } else {
@@ -44,8 +47,8 @@ const navigate = useNavigate();
           <Title>Recentemente Adicionados</Title>
           <HighlightProducts>
             {products.slice(-5).reverse().map((book, index) => (
-              <Product  key={index}>
-                <Info onClick={()=>navigate(`/product/${book._id}`)}>
+              <Product key={index}>
+                <Info onClick={() => navigate(`/product/${book._id}`)}>
                   <Front src={book.imageURL} />
                   <h1>{book.title}</h1>
                   <h2>{book.price}</h2>
