@@ -4,6 +4,7 @@ import WelcomePage from "./components/pages/WelcomePage";
 import ThemeProvider from "./contexts/Theme";
 import SignInPage from "./components/pages/SignInPage";
 import UserInfoProvider from "./contexts/UserInfo";
+
 import SignUpPage from "./components/pages/SignUpPage";
 import ProductsPage from "./components/pages/ProductsPage";
 import SidebarProvider from "./contexts/SidebarContext";

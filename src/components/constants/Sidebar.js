@@ -32,6 +32,7 @@ export default function Sidebar() {
   const { setTheme, theme } = useTheme();
   const { userInfo } = useUserInfo();
 
+
   return (
     <>
       {sideBar && (
@@ -115,7 +116,7 @@ export default function Sidebar() {
         </>
       )}
     </>
-  );
+  ); */
 }
 
 const SwitchThemes = styled.div`

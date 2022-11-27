@@ -3,7 +3,9 @@ import { useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import { useUserInfo } from "../../contexts/UserInfo";
+
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -36,14 +38,15 @@ export default function SignUpPage() {
 
       axios
         .post("http://localhost:5000/sign-up", form)
+
         .then((answer) => {
           alert(answer.data);
           setLoading(false);
           navigate("/sign-in");
         })
         .catch((err) => {
-          console.log(err.response.data);
-          alert(err.response.data);
+          console.log(err.response);
+          alert(err.response);
           setLoading(false);
         });
     } else {

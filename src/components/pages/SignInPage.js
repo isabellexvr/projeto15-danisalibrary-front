@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserInfo } from "../../contexts/UserInfo";
+
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
 
@@ -33,6 +34,7 @@ export default function SignInPage() {
 
     axios
       .post("http://localhost:5000/sign-in", form)
+
       .then((answer) => {
         navigate("/market");
         console.log(answer);
