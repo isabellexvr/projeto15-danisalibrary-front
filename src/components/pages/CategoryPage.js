@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../colors";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryPage() {
   const { category } = useParams();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -38,12 +40,15 @@ export default function CategoryPage() {
           <ProductsContainer>
             {products.map((product, index) => (
               <ProductStyle key={index}>
-                <img alt="book-cover" src={product.imageURL} />
-                <h1>{product.title}</h1>
-                <h2>{product.price}</h2>
+                <Info onClick={()=>navigate(`/product/${product._id}`)}>
+                  <img alt="book-cover" src={product.imageURL} />
+                  <h1>{product.title}</h1>
+                  <h2>{product.price}</h2>
+                </Info>
+
                 <button>Comprar</button>
               </ProductStyle>
-            ))}{" "}
+            ))}
           </ProductsContainer>
         </PageStyle>
       )}
@@ -58,6 +63,25 @@ const Title = styled.h1`
   font-weight: 700;
   text-align: center;
 `;
+
+const Info = styled.div`
+  > img {
+    width: 125px;
+  }
+  > h1 {
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-top: 4px;
+    color: ${colors.purple};
+    text-align: center;
+    width: 135px;
+  }
+  > h2 {
+    margin-top: 6px;
+    text-align: center;
+    color: green;
+    font-size: 17px;
+  }`;
 
 const PageStyle = styled.div`
   margin-top: 17vh;
@@ -85,23 +109,6 @@ const ProductStyle = styled.div`
   padding: 5px;
   padding-top: 10px;
   border-radius: 10px;
-  > img {
-    width: 125px;
-  }
-  > h1 {
-    font-size: 13.5px;
-    font-weight: 600;
-    margin-top: 4px;
-    color: ${colors.purple};
-    text-align: center;
-    width: 135px;
-  }
-  > h2 {
-    margin-top: 6px;
-    text-align: center;
-    color: green;
-    font-size: 17px;
-  }
   > button {
     margin-top: 10px;
     margin-bottom: 10px;

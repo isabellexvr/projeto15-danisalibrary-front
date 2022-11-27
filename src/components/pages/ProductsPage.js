@@ -4,37 +4,10 @@ import Sidebar from "../constants/Sidebar";
 import { useEffect, useState } from "react";
 import { colors } from "../../colors";
 import axios from "axios";
-
-const books = [
-  {
-    title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
-    imageURL: "https://m.media-amazon.com/images/I/71p0560f0NL.jpg",
-    price: "R$29,99",
-  },
-  {
-    title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
-    imageURL: "https://m.media-amazon.com/images/I/91c3vlY3PvL.jpg",
-    price: "R$29,99",
-  },
-  {
-    title: "Percy Jackson & Os Olimpianos: A maldição do Titã",
-    imageURL: "https://m.media-amazon.com/images/I/71ps3x0cJ9L.jpg",
-    price: "R$29,99",
-  },
-  {
-    title: "Percy Jackson & Os Olimpianos: A Batalha do Labirinto",
-    imageURL: "https://m.media-amazon.com/images/I/71ne5kmq0PL.jpg",
-    price: "R$29,99",
-  },
-  {
-    title: "Percy Jackson & Os Olimpianos: O Último Olimpiano",
-    imageURL: "https://m.media-amazon.com/images/I/61OyI3yri1L.jpg",
-    price: "R$29,99",
-  },
-];
+import { useNavigate } from "react-router-dom";
 
 export default function ProductsPage() {
-
+const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect((()=>{
@@ -55,8 +28,8 @@ export default function ProductsPage() {
           <Title>Recentemente Adicionados</Title>
           <HighlightProducts>
             {products.slice(-5).reverse().map((book, index) => (
-              <Product key={index}>
-                <Info>
+              <Product  key={index}>
+                <Info onClick={()=>navigate(`/product/${book._id}`)}>
                   <Front src={book.imageURL} />
                   <h1>{book.title}</h1>
                   <h2>{book.price}</h2>
