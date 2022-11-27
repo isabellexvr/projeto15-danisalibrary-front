@@ -34,12 +34,7 @@ export default function SignInPage() {
     setLoading(true);
 
     axios
-<<<<<<< HEAD
       .post("https://danisalibrary.onrender.com/sign-in", form)
-=======
-      .post("http://localhost:5000/sign-in", form)
-
->>>>>>> 72f1800af43afab38be1fe880558e8724a5ade4e
       .then((answer) => {
         navigate("/market");
         console.log(answer);

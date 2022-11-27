@@ -37,12 +37,7 @@ export default function SignUpPage() {
       delete form.confirmPassword;
 
       axios
-<<<<<<< HEAD
         .post("https://danisalibrary.onrender.com/sign-up", form)
-=======
-        .post("http://localhost:5000/sign-up", form)
-
->>>>>>> 72f1800af43afab38be1fe880558e8724a5ade4e
         .then((answer) => {
           alert(answer.data);
           setLoading(false);
