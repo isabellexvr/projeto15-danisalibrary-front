@@ -35,21 +35,27 @@ const books = [
 
 export default function ProductsPage() {
 
+  const [products, setProducts] = useState([]);
+
   useEffect((()=>{
     axios.get("https://danisalibrary.onrender.com/get-products")
-    .then((answer)=> console.log(answer.data))
+    .then((answer)=> {
+      setProducts(answer.data)
+      console.log(answer.data)})
     .catch(err => console.log(err))
   }),[])
+
+
   return (
     <PageStyle>
       <Header />
       <Sidebar />
       <Highlights>
         <div>
-          <h1>Destaques</h1>
+          <Title>Recentemente Adicionados</Title>
           <HighlightProducts>
-            {books.map((book) => (
-              <Product>
+            {products.slice(-5).reverse().map((book, index) => (
+              <Product key={index}>
                 <Info>
                   <Front src={book.imageURL} />
                   <h1>{book.title}</h1>
@@ -71,6 +77,15 @@ const PageStyle = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
+`;
+
+const Title = styled.h1`
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 25px;
+  color: ${colors.purple};
+  font-weight: 700;
+  text-align: center;
 `;
 
 const Highlights = styled.div`
@@ -119,6 +134,7 @@ const Info = styled.div`
     font-weight: 600;
     margin-top: 4px;
     color: ${colors.purple};
+    text-align: center;
   }
   > h2 {
     margin-top: 12px;

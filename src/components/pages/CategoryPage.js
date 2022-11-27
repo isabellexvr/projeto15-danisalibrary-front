@@ -3,20 +3,115 @@ import Sidebar from "../constants/Sidebar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import { colors } from "../../colors";
 
 export default function CategoryPage() {
   const { category } = useParams();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/get-products/${category}`)
-      .then((answer) => console.log(answer.data))
+      .get(`https://danisalibrary.onrender.com/get-products/${category}`)
+      .then((answer) => {
+        setProducts(answer.data);
+        console.log(answer.data);
+      })
       .catch((err) => console.log(err));
   }, [category]);
   return (
     <>
-      <Header />
-      <Sidebar/>
+      {products.length < 1 && (
+        <PageStyle>
+          <Header />
+          <Sidebar />
+          <Title>Infelizmente, ainda não há livros para essa categoria.</Title>
+        </PageStyle>
+      )}
+
+      {products.length > 0 && (
+        <PageStyle>
+          <Header />
+          <Sidebar />
+          <Title>{category.toLocaleUpperCase()}</Title>
+          <ProductsContainer>
+            {products.map((product, index) => (
+              <ProductStyle key={index}>
+                <img alt="book-cover" src={product.imageURL} />
+                <h1>{product.title}</h1>
+                <h2>{product.price}</h2>
+                <button>Comprar</button>
+              </ProductStyle>
+            ))}{" "}
+          </ProductsContainer>
+        </PageStyle>
+      )}
     </>
   );
 }
+
+const Title = styled.h1`
+  margin-top: 15px;
+  font-size: 25px;
+  color: ${colors.purple};
+  font-weight: 700;
+  text-align: center;
+`;
+
+const PageStyle = styled.div`
+  margin-top: 17vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+`;
+
+const ProductsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 95%;
+  margin-top: 25px;
+`;
+
+const ProductStyle = styled.div`
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0px 0px 15px 2px ${colors.pastelLightPurple};
+  padding: 5px;
+  padding-top: 10px;
+  border-radius: 10px;
+  > img {
+    width: 125px;
+  }
+  > h1 {
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-top: 4px;
+    color: ${colors.purple};
+    text-align: center;
+    width: 135px;
+  }
+  > h2 {
+    margin-top: 6px;
+    text-align: center;
+    color: green;
+    font-size: 17px;
+  }
+  > button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: ${colors.lightPurple};
+    width: 80%;
+    height: 30px;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+  }
+`;
