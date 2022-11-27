@@ -77,6 +77,7 @@ const Info = styled.div`
   }
   > p {
     margin-top: 20px;
+    margin-bottom: 20px;
     text-align: justify;
     font-size: 14px;
     line-height: 15px;
