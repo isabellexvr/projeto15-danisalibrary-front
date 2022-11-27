@@ -8,19 +8,17 @@ import { FaPencilAlt } from "react-icons/fa";
 import { useUserInfo } from "../../contexts/UserInfo";
 import axios from "axios";
 
-// import { useToken } from "../../contexts/Token";
-
 export default function UserPage() {
 
     const [nameRegistration, setNameRegistration] = useState("");
     const [photografy, setPhotografy] = useState("");
-    // const [zipCode, setZipCode] = useState("");
     const [enableName, setEnableName] = useState(true);
     const [enablePhoto, setEnablePhoto] = useState(true);
     const [enable, setEnable] = useState(true);
     
     const { userInfo } = useUserInfo();
     const navigate = useNavigate();
+    console.log("userInfo", userInfo);
 
     function habilitae(param) {
 
@@ -33,18 +31,21 @@ export default function UserPage() {
         }
     }
 
-    function chanceData() {
+    function chanceData(e) {
+        e.preventDefault();
+        
         setEnableName(true);
         setEnablePhoto(true);
         setEnable(true);
 
         const {token} = userInfo
+        console.log("token", token)
 
         const URL = "https://danisalibrary.onrender.com/change-data";
 
         const body = {
-            name: enableName,
-            imageURL: enablePhoto
+            name: nameRegistration,
+            imageURL: photografy
         }
 
         console.log("body user", body)
