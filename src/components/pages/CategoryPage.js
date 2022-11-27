@@ -7,11 +7,15 @@ import { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../colors";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/Cart";
 
 export default function CategoryPage() {
   const { category } = useParams();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+
+  const { setCart, cart, counter, setCounter } = useContext(AuthContext);
 
 
   useEffect(() => {
@@ -23,6 +27,20 @@ export default function CategoryPage() {
       })
       .catch((err) => console.log(err));
   }, [category]);
+
+  function addItemCart(prod) {
+    console.log("prod", prod);
+    setCounter(counter + 1)
+    const exist = cart.some((book) => book._id === prod._id)
+    if (exist) {
+      alert("Este livro já está no seu carrinho :)")
+    } else {
+      const newBook = [...cart, prod];
+      console.log("livros", newBook);
+      setCart(newBook);
+    }
+  }
+
   return (
     <>
       {products.length < 1 && (
@@ -47,7 +65,7 @@ export default function CategoryPage() {
                   <h2>{product.price}</h2>
                 </Info>
 
-                <button>Comprar</button>
+                <button onClick={() => addItemCart(product)}>Comprar</button>
               </ProductStyle>
             ))}
           </ProductsContainer>
