@@ -4,16 +4,21 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/Cart";
 
 export default function Header() {
   const { setSideBar } = useSidebar();
+  const { counter } = useContext(AuthContext);
+
   const navigate = useNavigate();
+
 
   return (
     <HeaderStyle>
       <Top>
         <GiHamburgerMenu onClick={() => setSideBar(true)} />
-        <TitleContainer onClick={()=> navigate("/market")}>
+        <TitleContainer onClick={() => navigate("/market")}>
           <h1>LIBRARY</h1>
           <h2>
             DAN<strong>I</strong>SA
@@ -26,7 +31,10 @@ export default function Header() {
           }} />
           <FaShoppingCart onClick={() => {
             navigate("/cart");
-          }}/>
+          }} />
+          <Contador>
+            <h1>{counter}</h1>
+          </Contador>
         </div>
       </Top>
       <HorizontalLine />
@@ -47,6 +55,15 @@ const HeaderStyle = styled.div`
     cursor: pointer;
   }
 `;
+
+const Contador = styled.div`
+ h1{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1d42;
+ }
+`
 
 const Top = styled.div`
   margin: 0 auto;

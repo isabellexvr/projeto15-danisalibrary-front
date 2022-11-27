@@ -8,12 +8,11 @@ import { colors } from "../../colors";
 import { AiFillDelete, AiFillSafetyCertificate } from "react-icons/ai";
 
 export default function CartPage() {
-    const { cart, setCart } = useContext(AuthContext);
+    const { cart, setCart, counter, setCounter } = useContext(AuthContext);
     console.log("cart", cart);
 
     function removeItemCart(prod) {
-        console.log("cheguei no delete");
-
+        setCounter(counter - 1);
         const deleteBook = cart.filter((book) => book._id !== prod._id)
         setCart(deleteBook);
     }
@@ -81,10 +80,10 @@ const Info = styled.div`
 
 const Buy = styled.div`
   display: flex;
-  width: 74%;
+  width: 67%;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 5px;
   h1 {
     color: green;
     margin-top: 15px;
@@ -94,7 +93,7 @@ const Buy = styled.div`
   }
   svg {
     margin-top: 10px;
-    font-size: 50px;
+    font-size: 30px;
     color: ${colors.purple};
     }
 `;
