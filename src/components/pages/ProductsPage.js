@@ -7,6 +7,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 export default function ProductsPage() {
