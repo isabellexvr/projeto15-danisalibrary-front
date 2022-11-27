@@ -56,7 +56,7 @@ export default function UserPage() {
             }
         }
 
-        const promise = axios.post(URL, body, config);
+        const promise = axios.put(URL, body, config);
 
         promise.then((res) => {
             console.log("res user", res)
