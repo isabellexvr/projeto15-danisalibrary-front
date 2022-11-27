@@ -7,7 +7,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 
 export default function ProductsPage() {
 const navigate = useNavigate();
@@ -18,13 +18,13 @@ const navigate = useNavigate();
   useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
     .then((answer)=> {
-      setProducts(answer.data)
-      console.log(answer.data)})
+      setProducts(answer.data)})
       .catch(err => console.log(err))
   }), [products])
 
   function addItemCart(prod) {
-    const exist = cart.some((book) => book.id === prod.id)
+    console.log("prod", prod);
+    const exist = cart.some((book) => book._id === prod._id)
     if (exist) {
       alert("Este livro já está no seu carrinho :)")
     } else {
