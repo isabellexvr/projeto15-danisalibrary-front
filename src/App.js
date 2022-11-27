@@ -11,6 +11,7 @@ import SidebarProvider from "./contexts/SidebarContext";
 import UserPage from "./components/pages/UserPage";
 import CategoryPage from "./components/pages/CategoryPage";
 import AuthProvider from "./contexts/Cart";
+import ProductPage from "./components/pages/SingleProductPage";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/market" element={<ProductsPage />} />
                 <Route path="/market/:category" element={<CategoryPage />} />
+                <Route path="/product/:bookId" element={<ProductPage />} />
               </Routes>
             </BrowserRouter>
           </AuthProvider>

@@ -6,50 +6,22 @@ import { colors } from "../../colors";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
+import { useNavigate } from "react-router-dom";
 
-
-export const books = [
-  {
-    id: 1,
-    title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
-    imageURL: "https://m.media-amazon.com/images/I/71p0560f0NL.jpg",
-    price: "R$29,99",
-  },
-  {
-    id: 2,
-    title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
-    imageURL: "https://m.media-amazon.com/images/I/91c3vlY3PvL.jpg",
-    price: "R$29,99",
-  },
-  {
-    id: 3,
-    title: "Percy Jackson & Os Olimpianos: A maldição do Titã",
-    imageURL: "https://m.media-amazon.com/images/I/71ps3x0cJ9L.jpg",
-    price: "R$29,99",
-  },
-  {
-    id: 4,
-    title: "Percy Jackson & Os Olimpianos: A Batalha do Labirinto",
-    imageURL: "https://m.media-amazon.com/images/I/71ne5kmq0PL.jpg",
-    price: "R$29,99",
-  },
-  {
-    id: 5,
-    title: "Percy Jackson & Os Olimpianos: O Último Olimpiano",
-    imageURL: "https://m.media-amazon.com/images/I/61OyI3yri1L.jpg",
-    price: "R$29,99",
-  },
-];
 
 export default function ProductsPage() {
+const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
 
   const { setCart, cart } = useContext(AuthContext);
 
   useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
-      .then((answer) => console.log(answer.data))
+    .then((answer)=> {
+      setProducts(answer.data)
+      console.log(answer.data)})
       .catch(err => console.log(err))
-  }), [])
+  }), [products])
 
   function addItemCart(prod) {
     const exist = cart.some((book) => book.id === prod.id)
@@ -62,18 +34,17 @@ export default function ProductsPage() {
     }
   }
 
-
   return (
     <PageStyle>
       <Header />
       <Sidebar />
       <Highlights>
         <div>
-          <h1>Destaques</h1>
+          <Title>Recentemente Adicionados</Title>
           <HighlightProducts>
-            {books.map((book) => (
-              <Product>
-                <Info>
+            {products.slice(-5).reverse().map((book, index) => (
+              <Product  key={index}>
+                <Info onClick={()=>navigate(`/product/${book._id}`)}>
                   <Front src={book.imageURL} />
                   <h1>{book.title}</h1>
                   <h2>{book.price}</h2>
@@ -94,6 +65,15 @@ const PageStyle = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
+`;
+
+const Title = styled.h1`
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 25px;
+  color: ${colors.purple};
+  font-weight: 700;
+  text-align: center;
 `;
 
 const Highlights = styled.div`
@@ -142,6 +122,7 @@ const Info = styled.div`
     font-weight: 600;
     margin-top: 4px;
     color: ${colors.purple};
+    text-align: center;
   }
   > h2 {
     margin-top: 12px;
