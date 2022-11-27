@@ -7,6 +7,7 @@ import { useEffect } from "react";
 export default function CategoryPage() {
   const { category } = useParams();
 
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/get-products/${category}`)

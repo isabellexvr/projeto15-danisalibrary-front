@@ -1,21 +1,13 @@
-import React, {createContext, useState, useContext} from "react";
+import React, { createContext, useState } from "react";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({});
 
-export default function AuthProvider({children}){
-    const [token, setToken] = useState("");
-    const [name, setName] = useState("");
-    const [imageURL, setImageURL] = useState("");
+export default function AuthProvider({ children }) {
+    const [cart, setCart] = useState("");
 
     return (
-        <AuthContext.Provider value={{token, setToken, name, setName, imageURL, setImageURL}}>
+        <AuthContext.Provider value={{ cart, setCart }}>
             {children}
         </AuthContext.Provider>
-    );
-};
-
-export function useToken(){
-    const context = useContext(AuthContext);
-    const{token, setToken} = context;
-    return ({token, setToken});
+    )
 }

@@ -1,32 +1,40 @@
 import styled from "styled-components";
 import Header from "../constants/Header";
 import Sidebar from "../constants/Sidebar";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { colors } from "../../colors";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/Ayth";
 
-const books = [
+
+export const books = [
   {
+    id: 1,
     title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
     imageURL: "https://m.media-amazon.com/images/I/71p0560f0NL.jpg",
     price: "R$29,99",
   },
   {
+    id: 2,
     title: "Percy Jackson & Os Olimpianos: O Ladrão de Raios",
     imageURL: "https://m.media-amazon.com/images/I/91c3vlY3PvL.jpg",
     price: "R$29,99",
   },
   {
+    id: 3,
     title: "Percy Jackson & Os Olimpianos: A maldição do Titã",
     imageURL: "https://m.media-amazon.com/images/I/71ps3x0cJ9L.jpg",
     price: "R$29,99",
   },
   {
+    id: 4,
     title: "Percy Jackson & Os Olimpianos: A Batalha do Labirinto",
     imageURL: "https://m.media-amazon.com/images/I/71ne5kmq0PL.jpg",
     price: "R$29,99",
   },
   {
+    id: 5,
     title: "Percy Jackson & Os Olimpianos: O Último Olimpiano",
     imageURL: "https://m.media-amazon.com/images/I/61OyI3yri1L.jpg",
     price: "R$29,99",
@@ -35,11 +43,26 @@ const books = [
 
 export default function ProductsPage() {
 
-  useEffect((()=>{
+  const { setCart, cart } = useContext(AuthContext);
+
+  useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
-    .then((answer)=> console.log(answer.data))
-    .catch(err => console.log(err))
-  }),[])
+      .then((answer) => console.log(answer.data))
+      .catch(err => console.log(err))
+  }), [])
+
+  function addItemCart(prod) {
+    const exist = cart.some((book) => book.id === prod.id)
+    if (exist) {
+      alert("Este livro já está no seu carrinho :)")
+    } else {
+      const newBook = [...cart, prod];
+      console.log("livros", newBook);
+      setCart(newBook);
+    }
+  }
+
+
   return (
     <PageStyle>
       <Header />
@@ -55,7 +78,7 @@ export default function ProductsPage() {
                   <h1>{book.title}</h1>
                   <h2>{book.price}</h2>
                 </Info>
-                <button>Comprar</button>
+                <button onClick={() => addItemCart(book)}>Comprar</button>
               </Product>
             ))}
           </HighlightProducts>
