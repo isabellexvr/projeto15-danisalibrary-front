@@ -4,12 +4,12 @@ import WelcomePage from "./components/pages/WelcomePage";
 import ThemeProvider from "./contexts/Theme";
 import SignInPage from "./components/pages/SignInPage";
 import UserInfoProvider from "./contexts/UserInfo";
-
 import SignUpPage from "./components/pages/SignUpPage";
 import ProductsPage from "./components/pages/ProductsPage";
 import SidebarProvider from "./contexts/SidebarContext";
 import UserPage from "./components/pages/UserPage";
 import CategoryPage from "./components/pages/CategoryPage";
+import ProductPage from "./components/pages/SingleProductPage";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
               <Route path="/user" element={<UserPage />} />
               <Route path="/market" element={<ProductsPage />} />
               <Route path="/market/:category" element={<CategoryPage />} />
+              <Route path="/product/:bookId" element={<ProductPage />} />
             </Routes>
           </BrowserRouter>
         </SidebarProvider>
