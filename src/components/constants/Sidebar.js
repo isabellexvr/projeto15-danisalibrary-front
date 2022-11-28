@@ -36,6 +36,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
   const { userInfo, setUserInfo } = useUserInfo();
+  const isLogged = localStorage.getItem("data");
 
   return (
     <>
@@ -76,28 +77,33 @@ export default function Sidebar() {
                   ))}
                 </div>
               </Categories>
-              <LogOut
-                onClick={() => {
-                  const isLogged = localStorage.getItem("data");
-                  const config = {
-                    headers: {
-                      Authorization: `Bearer ${userInfo.token}`,
-                    },
-                  };
-                  axios
-                    .delete(`https://danisalibrary.onrender.com/logout`, config).then((answer) => {
-                      localStorage.removeItem("data");
-                      setUserInfo({});
-                      setSideBar(false);
-                      navigate("/");
-                      console.log(userInfo);
-                    })
-                    .catch((err) => console.log(err.data));
-                }}
-              >
-                <BiLogOut />
-                <h1>Fazer Logout</h1>
-              </LogOut>
+              {isLogged && (
+                <LogOut
+                  onClick={() => {
+                    const config = {
+                      headers: {
+                        Authorization: `Bearer ${userInfo.token}`,
+                      },
+                    };
+                    axios
+                      .delete(
+                        `https://danisalibrary.onrender.com/logout`,
+                        config
+                      )
+                      .then((answer) => {
+                        localStorage.removeItem("data");
+                        setUserInfo({});
+                        setSideBar(false);
+                        navigate("/");
+                        console.log(userInfo);
+                      })
+                      .catch((err) => console.log(err.data));
+                  }}
+                >
+                  <BiLogOut />
+                  <h1>Fazer Logout</h1>
+                </LogOut>
+              )}
             </UserInfo>
             <div className="sidebar-content">
               <div className="devs">
@@ -128,8 +134,7 @@ export default function Sidebar() {
             </div>
           </SideBarContent>
         </>
-      )
-      }
+      )}
     </>
   );
 }
