@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { useUserInfo } from "../../contexts/UserInfo";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {BiArrowBack} from "react-icons/bi"
 
 export default function SaleInfoPage() {
   const [loading, setLoading] = useState(false);
@@ -60,8 +61,10 @@ export default function SaleInfoPage() {
       {!loading && (
         <PageStyle>
           <PaymentHeader>
-            <h1>Página de Pagamento Seguro</h1>
+          <BiArrowBack onClick={()=> navigate("/cart")}/>
+            <h1>PÁGINA DE PAGAMENTO SEGURO</h1>
             <GiPadlock />
+
           </PaymentHeader>
           <PaymentInfo>
             <h1>
@@ -74,8 +77,8 @@ export default function SaleInfoPage() {
             <div>
               <ChosenItemsContainer>
                 <h1>Itens a serem Comprados:</h1>
-                {cart.map((item) => (
-                  <Item>
+                {cart.map((item, index) => (
+                  <Item key={index}>
                     <img alt="book-cover" src={item.imageURL} />
                     <div>
                       <h1>{item.title}</h1>
@@ -96,7 +99,7 @@ export default function SaleInfoPage() {
               </TotalPrice>
             </div>
           </PaymentInfo>
-          <Line></Line>
+          <Line>a</Line>
           <Title>Preenchimento de Dados</Title>
           <UserInfoForm onSubmit={sendForm}>
             <input
@@ -185,7 +188,7 @@ const PaymentInfo = styled.div`
   width: 96%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   > h1:first-child {
     width: 40%;
     text-align: center;
@@ -213,19 +216,25 @@ const PaymentHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  color: white;
   > h1 {
-    font-size: 23px;
+    font-size: 22px;
+    width: 65%;
+    text-align: center;
     font-weight: 900;
     font-family: "Poppins", sans-serif;
+    line-height: 25px;
+    color: ${colors.darkPurple};
   }
   > svg {
-    font-size: 25px;
+    font-size: 30px;
   }
 `;
 
 const Title = styled.h1`
   margin-bottom: 25px;
+  margin-top: 15px;
   font-size: 25px;
   color: ${colors.purple};
   font-weight: 700;
@@ -358,5 +367,8 @@ const TotalPrice = styled.div`
 `;
 
 const Line = styled.div`
-
+height: 2px;
+background-color: ${colors.darkPurple};
+width: 90%;
+color: white;
 `
