@@ -5,12 +5,17 @@ import { PropagateLoader } from "react-spinners";
 import { GiPadlock } from "react-icons/gi";
 import { AuthContext } from "../../contexts/Cart";
 import { useContext } from "react";
+import { useUserInfo } from "../../contexts/UserInfo";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SaleInfoPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
+  const { userInfo } = useUserInfo();
+  const navigate = useNavigate();
 
-  const { cart } = useContext(AuthContext);
+  const { cart, balance } = useContext(AuthContext);
 
   console.log(cart);
 
@@ -20,7 +25,34 @@ export default function SaleInfoPage() {
 
   function sendForm(e) {
     e.preventDefault();
+
     setLoading(true);
+
+    const totalPrice = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(balance);
+
+    const { token } = userInfo;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const body = { clientInfo: { ...form, totalPrice }, boughtItems: cart };
+
+    axios
+      .post("https://danisalibrary.onrender.com/post-sale", body, config)
+      .then((answer) => {
+        alert(answer.data);
+        setLoading(false);
+        navigate("/market")
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -32,7 +64,13 @@ export default function SaleInfoPage() {
             <GiPadlock />
           </PaymentHeader>
           <PaymentInfo>
-            <h1>INFORMAÇÕES DA COMPRA</h1>
+            <h1>
+              INFORMAÇÕES
+              <br />
+              DA
+              <br />
+              COMPRA
+            </h1>
             <div>
               <ChosenItemsContainer>
                 <h1>Itens a serem Comprados:</h1>
@@ -41,7 +79,7 @@ export default function SaleInfoPage() {
                     <img alt="book-cover" src={item.imageURL} />
                     <div>
                       <h1>{item.title}</h1>
-                      <h2>{item.price.$numberDecimal}</h2>
+                      <h2>R$ {item.price.$numberDecimal}</h2>
                     </div>
                   </Item>
                 ))}
@@ -49,7 +87,12 @@ export default function SaleInfoPage() {
 
               <TotalPrice>
                 <h1>Preço Total:</h1>
-                <h2>20</h2>
+                <h2>
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(balance)}
+                </h2>
               </TotalPrice>
             </div>
           </PaymentInfo>
@@ -88,16 +131,45 @@ export default function SaleInfoPage() {
             <h1>Página de Pagamento Seguro</h1>
             <GiPadlock />
           </PaymentHeader>
+          <PaymentInfo>
+            <h1>
+              INFORMAÇÕES
+              <br />
+              DA
+              <br />
+              COMPRA
+            </h1>
+            <div>
+              <ChosenItemsContainer>
+                <h1>Itens a serem Comprados:</h1>
+                {cart.map((item) => (
+                  <Item>
+                    <img alt="book-cover" src={item.imageURL} />
+                    <div>
+                      <h1>{item.title}</h1>
+                      <h2>R$ {item.price.$numberDecimal}</h2>
+                    </div>
+                  </Item>
+                ))}
+              </ChosenItemsContainer>
+
+              <TotalPrice>
+                <h1>Preço Total:</h1>
+                <h2>
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(balance)}
+                </h2>
+              </TotalPrice>
+            </div>
+          </PaymentInfo>
           <Title>Preenchimento de Dados</Title>
           <UserInfoForm onSubmit={sendForm}>
-            <input onChange={handleForm} placeholder="Nome Completo" disabled />
-            <input
-              onChange={handleForm}
-              placeholder="Telefone de Contato"
-              disabled
-            />
-            <input onChange={handleForm} placeholder="Endereço" disabled />
-            <SubmitButton color={colors.darkPurple}>
+            <input placeholder="Nome Completo" disabled />
+            <input placeholder="Telefone de Contato" disabled />
+            <input placeholder="Endereço" disabled />
+            <SubmitButton disabled color={colors.darkPurple}>
               <PropagateLoader color="white" size={8} />
             </SubmitButton>
           </UserInfoForm>
@@ -108,22 +180,22 @@ export default function SaleInfoPage() {
 }
 
 const PaymentInfo = styled.div`
-  margin-top: 20vh;
+  margin-top: 18vh;
   width: 96%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
   > h1:first-child {
     width: 40%;
-    text-align: right;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
+    text-align: center;
+
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     font-weight: 900;
-    color: ${colors.purple};
-    font-size: 20px;
+    color: ${colors.darkPurple};
+    font-size: 18px;
+    line-height: 28px;
   }
   > div {
     width: 60%;
@@ -234,6 +306,7 @@ const ChosenItemsContainer = styled.div`
     text-align: center;
     font-weight: 900;
     color: ${colors.purple};
+    margin-bottom: 12px;
   }
   justify-content: center;
 `;
@@ -269,11 +342,16 @@ const Item = styled.div`
 `;
 
 const TotalPrice = styled.div`
-margin-top: 15px;
->h1{
+  margin-top: 15px;
+  > h1 {
+    font-size: 17px;
 
-}
->h2{
+    font-weight: 900;
+    color: ${colors.purple};
+  }
+  > h2 {
     color: green;
-}
+    margin-top: 5px;
+    font-weight: 900;
+  }
 `;

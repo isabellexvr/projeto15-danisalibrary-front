@@ -108,6 +108,7 @@ const PageStyle = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
+
 `;
 
 const ProductsContainer = styled.div`
@@ -128,6 +129,7 @@ const ProductStyle = styled.div`
   padding: 5px;
   padding-top: 10px;
   border-radius: 10px;
+  margin-bottom: 15px;
   > button {
     margin-top: 10px;
     margin-bottom: 10px;

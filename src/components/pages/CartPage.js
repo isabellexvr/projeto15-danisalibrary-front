@@ -6,8 +6,10 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 import { colors } from "../../colors";
 import { AiFillDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
+  const navigate = useNavigate()
 
   const { cart, setCart, counter, setCounter, balance, setBalance } = useContext(AuthContext);
   console.log("cart", cart);
@@ -43,7 +45,7 @@ export default function CartPage() {
             <h1>Total:</h1>
             <h2>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(balance)}</h2>
           </Prices>
-          <ButtonConfirm to="/confirm-purchase">
+          <ButtonConfirm onClick={()=>navigate("/confirm-purchase")}>
             Confirmar compra
           </ButtonConfirm>
         </>
