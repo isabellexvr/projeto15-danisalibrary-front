@@ -82,7 +82,7 @@ export default function SaleInfoPage() {
                     <img alt="book-cover" src={item.imageURL} />
                     <div>
                       <h1>{item.title}</h1>
-                      <h2>R$ {item.price.$numberDecimal}</h2>
+                      <h2>R$ {item.price}</h2>
                     </div>
                   </Item>
                 ))}
@@ -151,7 +151,7 @@ export default function SaleInfoPage() {
                     <img alt="book-cover" src={item.imageURL} />
                     <div>
                       <h1>{item.title}</h1>
-                      <h2>R$ {item.price.$numberDecimal}</h2>
+                      <h2>R$ {item.price}</h2>
                     </div>
                   </Item>
                 ))}

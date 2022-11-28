@@ -21,7 +21,7 @@ export default function CartPage() {
     setCart(deleteBook);
 
     let currentValue = balance;
-    setBalance(currentValue - Number(prod.price.$numberDecimal));
+    setBalance(currentValue - Number(prod.price));
   }
 
   return (
@@ -42,7 +42,7 @@ export default function CartPage() {
                   <img alt="book" src={book.imageURL} />
                 </Info>
                 <Buy>
-                  <h1>R$ {book.price.$numberDecimal}</h1>
+                  <h1>R$ {book.price}</h1>
                   <AiFillDelete onClick={() => removeItemCart(book)} />
                 </Buy>
               </Book>

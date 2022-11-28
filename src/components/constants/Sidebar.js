@@ -330,6 +330,7 @@ const Categories = styled.div`
       font-weight: 400;
     }
   }
+  
 `;
 
 const StyleFix = styled.div`
