@@ -5,38 +5,51 @@ import Sidebar from "../constants/Sidebar";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 import { colors } from "../../colors";
-import { AiFillDelete, AiFillSafetyCertificate } from "react-icons/ai";
-import { useState } from "react";
+import { AiFillDelete } from "react-icons/ai";
 
 export default function CartPage() {
 
-  const { cart, setCart, counter, setCounter, balance } = useContext(AuthContext);
+  const { cart, setCart, counter, setCounter, balance, setBalance } = useContext(AuthContext);
   console.log("cart", cart);
 
   function removeItemCart(prod) {
     setCounter(counter - 1);
     const deleteBook = cart.filter((book) => book._id !== prod._id)
     setCart(deleteBook);
+
+    let currentValue = balance;
+    setBalance(currentValue - Number(prod.price.$numberDecimal));
   }
 
   return (
     <PageStyle>
       <Header />
-      <BookAll>
-        {cart.map((book) =>
-          <Book>
-            <Title>{book.title}</Title>
-            <Info><img alt="book" src={book.imageURL} /></Info>
-            <Buy>
-              <h1>{book.price.$numberDecimal}</h1>
-              <AiFillDelete onClick={() => removeItemCart(book)} />
-            </Buy>
-          </Book>
-        )}
-      </BookAll>
-      <Prices>
-        <h1>Valor Final: {balance} </h1>
-      </Prices>
+      {balance !== 0
+        ?
+        <>
+          <BookAll>
+            {cart.map((book) =>
+              <Book>
+                <Title>{book.title}</Title>
+                <Info><img alt="book" src={book.imageURL} /></Info>
+                <Buy>
+                  <h1>R$ {book.price.$numberDecimal}</h1>
+                  <AiFillDelete onClick={() => removeItemCart(book)} />
+                </Buy>
+              </Book>
+            )}
+          </BookAll>
+          <Prices>
+            <h1>Total:</h1>
+            <h2>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(balance)}</h2>
+          </Prices>
+          <ButtonConfirm to="/confirm-purchase">
+            Confirmar compra
+          </ButtonConfirm>
+        </>
+        :
+        <Null>Seu carrinho está vazio</Null>
+      }
       <Sidebar />
     </PageStyle>
   )
@@ -59,8 +72,7 @@ const BookAll = styled.div`
 
 const Book = styled.div`
     align-items: center;
-    width: 300px;
-    
+    width: 300px;   
 `
 
 const Title = styled.h1`
@@ -104,7 +116,48 @@ const Buy = styled.div`
 `;
 
 const Prices = styled.div`
-  width: 300px;
   height: 100px;
-  background-color: red;
+  font-family: "Poppins", sans-serif;
+  margin-top: 30px;
+  font-size: 19px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1{
+    color: ${colors.purple};
+    font-size: 25px;
+    font-weight: 900;
+  }
+  h2{
+    margin-top: 5px;
+    margin-left: 5px;
+    color: green;
+    font-size: 25px;
+    font-weight: 900;
+  }
+`
+
+const ButtonConfirm = styled.button`
+  width: 70%;
+  height: 46px;
+  border-radius: 5px;
+  background-color: ${colors.purple};
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  border: none;
+  align-items: center;
+  font-style: normal;
+  font-size: 20px;
+`
+
+const Null = styled.div`
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  color:  #7847a1;
+  text-decoration: none;
+  margin-top: 20px;
 `

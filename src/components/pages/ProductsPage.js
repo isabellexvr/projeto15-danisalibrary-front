@@ -15,7 +15,7 @@ export default function ProductsPage() {
 
   const [products, setProducts] = useState([]);
 
-  const { setCart, cart, counter, setCounter, balance, setBalnce } = useContext(AuthContext);
+  const { setCart, cart, counter, setCounter, balance, setBalance } = useContext(AuthContext);
 
   useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
@@ -26,29 +26,19 @@ export default function ProductsPage() {
   }), [products])
 
   function addItemCart(prod) {
-    console.log("prod", prod);
-    setCounter(counter + 1)
-    const exist = cart.some((book) => book._id === prod._id)
+    const exist = cart.some((book) => book._id === prod._id);
+
     if (exist) {
       alert("Este livro já está no seu carrinho :)")
     } else {
+      setCounter(counter + 1);
       const newBook = [...cart, prod];
       console.log("livros", newBook);
       setCart(newBook);
+
+      let currentValue = balance;
+      setBalance(currentValue + Number(prod.price.$numberDecimal));
     }
-
-    sum(prod)
-  }
-
-  function sum(prod) {
-    let sum = 0;
-
-    for (let i = 0; i < counter.length; i++) {
-      sum = sum + Number(prod.price.$numberDecimal )
-    }
-    sum.toFixed(2);
-
-    setCounter(sum);
   }
 
 return (
@@ -64,7 +54,7 @@ return (
               <Info onClick={() => navigate(`/product/${book._id}`)}>
                 <Front src={book.imageURL} />
                 <h1>{book.title}</h1>
-                <h2>{book.price.$numberDecimal}</h2>
+                <h2>R$ {book.price.$numberDecimal}</h2>
               </Info>
               <button onClick={() => addItemCart(book)}>Comprar</button>
             </Product>
