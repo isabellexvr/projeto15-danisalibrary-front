@@ -13,9 +13,9 @@ export default function Header() {
 
   const navigate = useNavigate();
 
-  function whats(){
+  function whats() {
     let text = "Olá, DanIsa Library!";
-    let url = `https://wa.me/5548998215536?text=${text}`
+    let url = `https://wa.me/5548998215536?text=${text}`;
 
     window.open(url);
   }
@@ -32,22 +32,26 @@ export default function Header() {
           <h3>THE BEST WAY TO BOOK</h3>
         </TitleContainer>
         <div>
-          <FaUserAlt onClick={() => {
-            navigate("/user");
-          }} />
-          <FaShoppingCart onClick={() => {
-            navigate("/cart");
-          }} />
+          <FaUserAlt
+            onClick={() => {
+              navigate("/user");
+            }}
+          />
+          <FaShoppingCart
+            onClick={() => {
+              navigate("/cart");
+            }}
+          />
           <Contador>
             <h1>{counter}</h1>
           </Contador>
-          <FaWhatsapp onClick={whats} />
         </div>
       </Top>
       <HorizontalLine />
       <Search>
         <input placeholder="O que você procura?" />
-      </Search>
+      </Search>{" "}
+      <WhatsappIcon onClick={whats} />
     </HeaderStyle>
   );
 }
@@ -64,13 +68,17 @@ const HeaderStyle = styled.div`
 `;
 
 const Contador = styled.div`
- h1{
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: #1a1d42;
- }
-`
+position: relative;
+  h1 {
+    position: absolute;
+    bottom: -7px;
+    left: -5px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: ${colors.purple};
+  }
+`;
 
 const Top = styled.div`
   margin: 0 auto;
@@ -159,3 +167,11 @@ const TitleContainer = styled.div`
     font-weight: 400;
   }
 `;
+
+const WhatsappIcon = styled(FaWhatsapp)`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: green;
+  font-size: 50px;
+`
