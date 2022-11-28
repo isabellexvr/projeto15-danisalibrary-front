@@ -63,8 +63,9 @@ export default function Sidebar() {
                   <h1>NAVEGAR POR CATEGORIAS</h1>
                 </div>
                 <div>
-                  {categories.map((categorie) => (
+                  {categories.map((categorie, index) => (
                     <div
+                      key={index}
                       onClick={() => {
                         setSideBar(false);
                         navigate(`/market/${categorie}`);
@@ -281,7 +282,7 @@ const LogOut = styled.div`
 const Categories = styled.div`
   background-color: #604d79;
   width: 90%;
-  height: 27vh;
+  height: 35vh;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
