@@ -62,7 +62,7 @@ export default function CategoryPage() {
                 <Info onClick={()=>navigate(`/product/${product._id}`)}>
                   <img alt="book-cover" src={product.imageURL} />
                   <h1>{product.title}</h1>
-                  <h2>{product.price.$numberDecimal}</h2>
+                  <h2>R$ {product.price.$numberDecimal}</h2>
                 </Info>
 
                 <button onClick={() => addItemCart(product)}>Comprar</button>
@@ -84,13 +84,16 @@ const Title = styled.h1`
 `;
 
 const Info = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
   > img {
     width: 125px;
   }
   > h1 {
     font-size: 13.5px;
     font-weight: 600;
-    margin-top: 4px;
+    margin-top: 8px;
     color: ${colors.purple};
     text-align: center;
     width: 135px;
@@ -100,6 +103,7 @@ const Info = styled.div`
     text-align: center;
     color: green;
     font-size: 17px;
+    font-weight: 700;
   }`;
 
 const PageStyle = styled.div`
