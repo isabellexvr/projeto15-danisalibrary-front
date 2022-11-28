@@ -35,7 +35,7 @@ export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
-  const { userInfo } = useUserInfo();
+  const { userInfo, setUserInfo } = useUserInfo();
 
   return (
     <>
@@ -90,6 +90,7 @@ export default function Sidebar() {
                   console.log(JSON.parse(isLogged));
                   localStorage.removeItem("data");
                   setSideBar(false);
+                  setUserInfo({});
                   navigate("/");
                 }}
               >
