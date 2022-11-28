@@ -84,14 +84,14 @@ export default function Sidebar() {
                     },
                   };
                   axios
-                    .delete(`https://danisalibrary.onrender.com/logout`, config)
-                    .then((answer) => console.log(answer.data))
+                    .delete(`https://danisalibrary.onrender.com/logout`, config).then((answer) => {
+                      localStorage.removeItem("data");
+                      setUserInfo({});
+                      setSideBar(false);
+                      navigate("/");
+                      console.log(userInfo);
+                    })
                     .catch((err) => console.log(err.data));
-                  console.log(JSON.parse(isLogged));
-                  localStorage.removeItem("data");
-                  setSideBar(false);
-                  setUserInfo({});
-                  navigate("/");
                 }}
               >
                 <BiLogOut />
@@ -127,7 +127,8 @@ export default function Sidebar() {
             </div>
           </SideBarContent>
         </>
-      )}
+      )
+      }
     </>
   );
 }
