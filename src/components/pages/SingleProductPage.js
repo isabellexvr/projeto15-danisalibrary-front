@@ -32,7 +32,7 @@ export default function ProductPage() {
       <Info>
         <img alt="book-cover" src={product.imageURL} />
         <Buy>
-          <h1>{product.price.$numberDecimal}</h1>
+          <h1>R$ {product.price.$numberDecimal}</h1>
           <button>
             Adicionar ao Carrinho
             <FaShoppingCart />
