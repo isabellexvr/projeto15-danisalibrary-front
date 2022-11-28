@@ -6,35 +6,40 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 import { colors } from "../../colors";
 import { AiFillDelete, AiFillSafetyCertificate } from "react-icons/ai";
+import { useState } from "react";
 
 export default function CartPage() {
-    const { cart, setCart, counter, setCounter } = useContext(AuthContext);
-    console.log("cart", cart);
 
-    function removeItemCart(prod) {
-        setCounter(counter - 1);
-        const deleteBook = cart.filter((book) => book._id !== prod._id)
-        setCart(deleteBook);
-    }
+  const { cart, setCart, counter, setCounter, balance } = useContext(AuthContext);
+  console.log("cart", cart);
 
-    return (
-        <PageStyle>
-            <Header />
-            <BookAll>
-                {cart.map((book) =>
-                    <Book>
-                        <Title>{book.title}</Title>
-                        <Info><img alt="book" src={book.imageURL} /></Info>
-                        <Buy>
-                            <h1>{book.price}</h1>
-                            <AiFillDelete onClick={() => removeItemCart(book)} />
-                        </Buy>
-                    </Book>
-                )}
-            </BookAll>
-            <Sidebar />
-        </PageStyle>
-    )
+  function removeItemCart(prod) {
+    setCounter(counter - 1);
+    const deleteBook = cart.filter((book) => book._id !== prod._id)
+    setCart(deleteBook);
+  }
+
+  return (
+    <PageStyle>
+      <Header />
+      <BookAll>
+        {cart.map((book) =>
+          <Book>
+            <Title>{book.title}</Title>
+            <Info><img alt="book" src={book.imageURL} /></Info>
+            <Buy>
+              <h1>{book.price}</h1>
+              <AiFillDelete onClick={() => removeItemCart(book)} />
+            </Buy>
+          </Book>
+        )}
+      </BookAll>
+      <Prices>
+        <h1>Valor Final: {balance} </h1>
+      </Prices>
+      <Sidebar />
+    </PageStyle>
+  )
 };
 
 const PageStyle = styled.div`
@@ -97,3 +102,9 @@ const Buy = styled.div`
     color: ${colors.purple};
     }
 `;
+
+const Prices = styled.div`
+  width: 300px;
+  height: 100px;
+  background-color: red;
+`
