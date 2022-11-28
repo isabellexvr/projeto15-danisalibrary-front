@@ -26,7 +26,7 @@ export default function CartPage() {
   return (
     <PageStyle>
       <Header />
-      {balance !== 0
+      {cart.length !== 0
         ?
         <>
           <BookAll>
