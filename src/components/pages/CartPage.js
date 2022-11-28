@@ -95,6 +95,7 @@ const BookAll = styled.div`
 
 const Book = styled.div`
   display: flex;
+  margin-top: 10px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
