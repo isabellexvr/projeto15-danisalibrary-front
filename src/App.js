@@ -13,7 +13,6 @@ import CategoryPage from "./components/pages/CategoryPage";
 import AuthProvider from "./contexts/Cart";
 import ProductPage from "./components/pages/SingleProductPage";
 
-
 function App() {
   return (
     <UserInfoProvider>
