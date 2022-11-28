@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { BsGithub } from "react-icons/bs";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiLogIn, BiPlus } from "react-icons/bi";
 import { useTheme, themes } from "../../contexts/Theme";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { GrAdd } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserInfo } from "../../contexts/UserInfo";
@@ -103,6 +104,18 @@ export default function Sidebar() {
                   <BiLogOut />
                   <h1>Fazer Logout</h1>
                 </LogOut>
+              )}
+              {!isLogged && (
+                <StyleFix>
+                  <LogOut onClick={()=>navigate("/sign-in")}>
+                    <BiLogIn />
+                    <h1>Fazer Login</h1>
+                  </LogOut>
+                  <LogOut onClick={()=>navigate("/sign-up")}>
+                    <BiPlus/>
+                    <h1>Fazer Cadastro</h1>
+                  </LogOut>
+                </StyleFix>
               )}
             </UserInfo>
             <div className="sidebar-content">
@@ -266,21 +279,26 @@ const UserInfo = styled.div`
 `;
 
 const LogOut = styled.div`
+background-color: #604d79;
+border-radius: 5px;
   margin-top: 15px;
   color: white;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60px;
-  width: 80px;
+  justify-content: space-evenly;
+  height: 65px;
+  width: 70px;
   > h1 {
     font-family: "Poppins", sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
+
   }
   > svg {
-    font-size: 30px;
+    font-size: 32px;
+    color: white;
   }
 `;
 
@@ -312,4 +330,11 @@ const Categories = styled.div`
       font-weight: 400;
     }
   }
+  
 `;
+
+const StyleFix = styled.div`
+display: flex;
+justify-content: space-around;
+width: 100%;
+`

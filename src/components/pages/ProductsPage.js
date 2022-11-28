@@ -21,6 +21,7 @@ export default function ProductsPage() {
     axios.get("https://danisalibrary.onrender.com/get-products")
       .then((answer) => {
         setProducts(answer.data)
+        console.log(answer.data)
       })
       .catch(err => console.log(err))
   }), [products])
@@ -37,14 +38,33 @@ export default function ProductsPage() {
       setCart(newBook);
 
       let currentValue = balance;
-      setBalance(currentValue + Number(prod.price.$numberDecimal));
+      setBalance(currentValue + Number(prod.price));
     }
   }
+
+  const hightLights = products.sort()
 
 return (
   <PageStyle>
     <Header />
     <Sidebar />
+    <Highlights>
+      <div>
+        <Title>Mais Vendidos</Title>
+        <HighlightProducts>
+          {hightLights.map((book, index) => (
+            <Product key={index}>
+              <Info onClick={() => navigate(`/product/${book._id}`)}>
+                <Front src={book.imageURL} />
+                <h1>{book.title}</h1>
+                <h2>R$ {book.price}</h2>
+              </Info>
+              <button onClick={() => addItemCart(book)}>Comprar</button>
+            </Product>
+          ))}
+        </HighlightProducts>
+      </div>
+    </Highlights>
     <Highlights>
       <div>
         <Title>Recentemente Adicionados</Title>
@@ -54,7 +74,7 @@ return (
               <Info onClick={() => navigate(`/product/${book._id}`)}>
                 <Front src={book.imageURL} />
                 <h1>{book.title}</h1>
-                <h2>R$ {book.price.$numberDecimal}</h2>
+                <h2>R$ {book.price}</h2>
               </Info>
               <button onClick={() => addItemCart(book)}>Comprar</button>
             </Product>
@@ -76,11 +96,11 @@ const PageStyle = styled.div`
 
 const Title = styled.h1`
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
   font-size: 25px;
   color: ${colors.purple};
   font-weight: 700;
-  text-align: center;
+  text-align: left;
 `;
 
 const Highlights = styled.div`
