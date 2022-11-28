@@ -12,7 +12,7 @@ export default function SaleInfoPage() {
 
   const { cart } = useContext(AuthContext);
 
-  console.log(cart)
+  console.log(cart);
 
   function handleForm({ target: { value, name } }) {
     setForm({ ...form, [name]: value });
@@ -32,10 +32,25 @@ export default function SaleInfoPage() {
             <GiPadlock />
           </PaymentHeader>
           <PaymentInfo>
-            <h1>Informações da Compra:</h1>
+            <h1>INFORMAÇÕES DA COMPRA</h1>
             <div>
+              <ChosenItemsContainer>
                 <h1>Itens a serem Comprados:</h1>
+                {cart.map((item) => (
+                  <Item>
+                    <img alt="book-cover" src={item.imageURL} />
+                    <div>
+                      <h1>{item.title}</h1>
+                      <h2>{item.price.$numberDecimal}</h2>
+                    </div>
+                  </Item>
+                ))}
+              </ChosenItemsContainer>
+
+              <TotalPrice>
                 <h1>Preço Total:</h1>
+                <h2>20</h2>
+              </TotalPrice>
             </div>
           </PaymentInfo>
           <Title>Preenchimento de Dados</Title>
@@ -94,17 +109,27 @@ export default function SaleInfoPage() {
 
 const PaymentInfo = styled.div`
   margin-top: 20vh;
+  width: 96%;
   display: flex;
-  height: 30vh;
-  >h1{
+  justify-content: space-between;
+  margin-bottom: 25px;
+  > h1:first-child {
     width: 40%;
     text-align: right;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 900;
+    color: ${colors.purple};
+    font-size: 20px;
   }
-  >div{
+  > div {
     width: 60%;
     text-align: right;
   }
-`
+`;
 
 const PaymentHeader = styled.div`
   background-color: ${colors.pastelLightPurple};
@@ -127,7 +152,6 @@ const PaymentHeader = styled.div`
 `;
 
 const Title = styled.h1`
-
   margin-bottom: 25px;
   font-size: 25px;
   color: ${colors.purple};
@@ -202,4 +226,54 @@ const SubmitButton = styled.button`
       left: 20;
     }
   }
+`;
+
+const ChosenItemsContainer = styled.div`
+  > h1:first-child {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    color: ${colors.purple};
+  }
+  justify-content: center;
+`;
+
+const Item = styled.div`
+  border: 1px solid ${colors.lightPurple};
+  margin-top: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > img {
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > h1 {
+      text-align: center;
+      width: 70%;
+      font-size: 12px;
+    }
+    > h2 {
+      margin-top: 10px;
+      text-align: center;
+      color: green;
+    }
+  }
+`;
+
+const TotalPrice = styled.div`
+margin-top: 15px;
+>h1{
+
+}
+>h2{
+    color: green;
+}
 `;
