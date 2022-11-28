@@ -23,8 +23,11 @@ export default function Header() {
   return (
     <HeaderStyle>
       <Top>
-        <GiHamburgerMenu onClick={() => {
-          setSideBar(true)}} />
+        <GiHamburgerMenu
+          onClick={() => {
+            setSideBar(true);
+          }}
+        />
         <TitleContainer onClick={() => navigate("/market")}>
           <h1>LIBRARY</h1>
           <h2>
@@ -38,11 +41,11 @@ export default function Header() {
               navigate("/user");
             }}
           />
-          <FaShoppingCart
+          <ShoppingCart
             onClick={() => {
               navigate("/cart");
             }}
-          />
+          ></ShoppingCart>{" "}
           <Contador>
             <h1>{counter}</h1>
           </Contador>
@@ -69,11 +72,10 @@ const HeaderStyle = styled.div`
 `;
 
 const Contador = styled.div`
-position: relative;
+  position: absolute;
+  right: -5px;
+  bottom: -6px;
   h1 {
-    position: absolute;
-    bottom: -7px;
-    left: -5px;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
     font-size: 20px;
@@ -96,6 +98,7 @@ const Top = styled.div`
     width: 19%;
   }
   > div {
+    position: relative;
     > svg {
       font-size: 25px;
       color: white;
@@ -175,4 +178,7 @@ const WhatsappIcon = styled(FaWhatsapp)`
   right: 20px;
   color: green;
   font-size: 50px;
-`
+`;
+
+const ShoppingCart = styled(FaShoppingCart)`
+`;
