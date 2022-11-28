@@ -4,6 +4,7 @@ import { PropagateLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserInfo } from "../../contexts/UserInfo";
+import { AuthContext } from "../../contexts/Cart";
 
 import { colors } from "../../colors";
 import HomePageBackground from "../constants/HomePageBackground";
@@ -13,6 +14,8 @@ export default function SignInPage() {
 
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
+
+   const { setBalance, setCounter } = useContext(AuthContext);
 
   const { setUserInfo, } = useUserInfo();
 
@@ -40,6 +43,8 @@ export default function SignInPage() {
         navigate("/market");
         console.log(answer);
         setUserInfo(answer.data);
+        setBalance(0);
+        setCounter(0);
         const serialized = JSON.stringify(answer.data);
         localStorage.setItem("data", serialized);
       })
