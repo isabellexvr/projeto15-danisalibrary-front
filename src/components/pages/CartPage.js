@@ -28,7 +28,7 @@ export default function CartPage() {
             <Title>{book.title}</Title>
             <Info><img alt="book" src={book.imageURL} /></Info>
             <Buy>
-              <h1>{book.price}</h1>
+              <h1>{book.price.$numberDecimal}</h1>
               <AiFillDelete onClick={() => removeItemCart(book)} />
             </Buy>
           </Book>

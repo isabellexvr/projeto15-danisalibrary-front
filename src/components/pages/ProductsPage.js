@@ -37,36 +37,43 @@ export default function ProductsPage() {
       setCart(newBook);
     }
 
-    sum()
+    sum(prod)
   }
 
-  function sum(){
+  function sum(prod) {
+    let sum = 0;
 
+    for (let i = 0; i < counter.length; i++) {
+      sum = sum + Number(prod.price.$numberDecimal )
+    }
+    sum.toFixed(2);
+
+    setCounter(sum);
   }
 
-  return (
-    <PageStyle>
-      <Header />
-      <Sidebar />
-      <Highlights>
-        <div>
-          <Title>Recentemente Adicionados</Title>
-          <HighlightProducts>
-            {products.slice(-5).reverse().map((book, index) => (
-              <Product key={index}>
-                <Info onClick={() => navigate(`/product/${book._id}`)}>
-                  <Front src={book.imageURL} />
-                  <h1>{book.title}</h1>
-                  <h2>{book.price}</h2>
-                </Info>
-                <button onClick={() => addItemCart(book)}>Comprar</button>
-              </Product>
-            ))}
-          </HighlightProducts>
-        </div>
-      </Highlights>
-    </PageStyle>
-  );
+return (
+  <PageStyle>
+    <Header />
+    <Sidebar />
+    <Highlights>
+      <div>
+        <Title>Recentemente Adicionados</Title>
+        <HighlightProducts>
+          {products.slice(-5).reverse().map((book, index) => (
+            <Product key={index}>
+              <Info onClick={() => navigate(`/product/${book._id}`)}>
+                <Front src={book.imageURL} />
+                <h1>{book.title}</h1>
+                <h2>{book.price.$numberDecimal}</h2>
+              </Info>
+              <button onClick={() => addItemCart(book)}>Comprar</button>
+            </Product>
+          ))}
+        </HighlightProducts>
+      </div>
+    </Highlights>
+  </PageStyle>
+);
 }
 
 const PageStyle = styled.div`
