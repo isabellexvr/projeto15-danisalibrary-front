@@ -12,7 +12,7 @@ import UserPage from "./components/pages/UserPage";
 import CategoryPage from "./components/pages/CategoryPage";
 import AuthProvider from "./contexts/Cart";
 import ProductPage from "./components/pages/SingleProductPage";
-
+import SaleInfoPage from "./components/pages/SaleInfoPage";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
                 <Route path="/market" element={<ProductsPage />} />
                 <Route path="/market/:category" element={<CategoryPage />} />
                 <Route path="/product/:bookId" element={<ProductPage />} />
+                <Route path="/confirm-purchase" element={<SaleInfoPage />} />
               </Routes>
             </BrowserRouter>
           </AuthProvider>
