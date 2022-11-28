@@ -22,9 +22,7 @@ export default function SignInPage() {
   const isLogged = localStorage.getItem("data");
   if (isLogged) {
     const data = JSON.parse(isLogged);
-    console.log("dados", data)
     setUserInfo(data);
-    console.log("set", setUserInfo)
     navigate("/market");
     return;
   }
@@ -41,7 +39,6 @@ export default function SignInPage() {
       .post("https://danisalibrary.onrender.com/sign-in", form)
       .then((answer) => {
         navigate("/market");
-        console.log(answer);
         setUserInfo(answer.data);
         setBalance(0);
         setCounter(0);
@@ -49,7 +46,6 @@ export default function SignInPage() {
         localStorage.setItem("data", serialized);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
         alert(err.response.data.message)
         setLoading(false);
       });

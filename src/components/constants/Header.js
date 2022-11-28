@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 
 export default function Header() {
-  const { setSideBar } = useSidebar();
+  const { setSideBar, sideBar } = useSidebar();
   const { counter } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -23,7 +23,8 @@ export default function Header() {
   return (
     <HeaderStyle>
       <Top>
-        <GiHamburgerMenu onClick={() => setSideBar(true)} />
+        <GiHamburgerMenu onClick={() => {
+          setSideBar(true)}} />
         <TitleContainer onClick={() => navigate("/market")}>
           <h1>LIBRARY</h1>
           <h2>

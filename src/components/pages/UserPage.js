@@ -18,7 +18,6 @@ export default function UserPage() {
     
     const { userInfo } = useUserInfo();
     const navigate = useNavigate();
-    console.log("userInfo", userInfo);
 
     function habilitae(param) {
 
@@ -39,7 +38,6 @@ export default function UserPage() {
         setEnable(true);
 
         const {token} = userInfo
-        console.log("token", token)
 
         const URL = "https://danisalibrary.onrender.com/change-data";
 
@@ -48,7 +46,6 @@ export default function UserPage() {
             imageURL: photografy
         }
 
-        console.log("body user", body)
 
         const config = {
             headers: {
@@ -59,13 +56,11 @@ export default function UserPage() {
         const promise = axios.put(URL, body, config);
 
         promise.then((res) => {
-            console.log("res user", res)
             alert("Dados alterados");
             navigate("/market");
         })
 
         promise.catch((erro) => {
-            console.log("erro pagina de user", erro.response);
             alert(erro.response.data);
             setEnable(false);
         })
