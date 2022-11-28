@@ -96,6 +96,7 @@ export default function SaleInfoPage() {
               </TotalPrice>
             </div>
           </PaymentInfo>
+          <Line></Line>
           <Title>Preenchimento de Dados</Title>
           <UserInfoForm onSubmit={sendForm}>
             <input
@@ -355,3 +356,7 @@ const TotalPrice = styled.div`
     font-weight: 900;
   }
 `;
+
+const Line = styled.div`
+
+`
