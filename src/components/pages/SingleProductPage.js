@@ -10,14 +10,12 @@ import { FaShoppingCart } from "react-icons/fa";
 export default function ProductPage() {
   const { bookId } = useParams();
   const [product, setProduct] = useState({});
-  console.log(bookId);
 
   useEffect(() => {
     axios
       .get(`https://danisalibrary.onrender.com/get-product-by-id/${bookId}`)
       .then((answer) => {
         setProduct(answer.data);
-        console.log(answer.data);
       })
       .catch((err) => {
         console.log(err);
@@ -32,7 +30,7 @@ export default function ProductPage() {
       <Info>
         <img alt="book-cover" src={product.imageURL} />
         <Buy>
-          <h1>R$ {product.price.$numberDecimal}</h1>
+          <h1>R$ {product.price}</h1>
           <button>
             Adicionar ao Carrinho
             <FaShoppingCart />

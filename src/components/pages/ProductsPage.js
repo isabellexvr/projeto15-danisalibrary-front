@@ -8,33 +8,34 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { useSidebar } from "../../contexts/SidebarContext";
 
 export default function ProductsPage() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
+  const { sideBar } = useSidebar();
 
-  const { setCart, cart, counter, setCounter, balance, setBalance } = useContext(AuthContext);
+  const { setCart, cart, counter, setCounter, balance, setBalance } =
+    useContext(AuthContext);
 
-  useEffect((() => {
-    axios.get("https://danisalibrary.onrender.com/get-products")
+  useEffect(() => {
+    axios
+      .get("https://danisalibrary.onrender.com/get-products")
       .then((answer) => {
-        setProducts(answer.data)
-        console.log(answer.data)
+        setProducts(answer.data);
       })
-      .catch(err => console.log(err))
-  }), [products])
+      .catch((err) => console.log(err));
+  }, [products]);
 
   function addItemCart(prod) {
     const exist = cart.some((book) => book._id === prod._id);
 
     if (exist) {
-      alert("Este livro já está no seu carrinho :)")
+      alert("Este livro já está no seu carrinho :)");
     } else {
       setCounter(counter + 1);
       const newBook = [...cart, prod];
-      console.log("livros", newBook);
       setCart(newBook);
 
       let currentValue = balance;
@@ -42,56 +43,68 @@ export default function ProductsPage() {
     }
   }
 
-  const hightLights = products.sort()
+  const hightLights = products.sort();
 
-return (
-  <PageStyle>
-    <Header />
-    <Sidebar />
-    <Highlights>
-      <div>
-        <Title>Mais Vendidos</Title>
-        <HighlightProducts>
-          {hightLights.map((book, index) => (
-            <Product key={index}>
-              <Info onClick={() => navigate(`/product/${book._id}`)}>
-                <Front src={book.imageURL} />
-                <h1>{book.title}</h1>
-                <h2>R$ {book.price}</h2>
-              </Info>
-              <button onClick={() => addItemCart(book)}>Comprar</button>
-            </Product>
-          ))}
-        </HighlightProducts>
-      </div>
-    </Highlights>
-    <Highlights>
-      <div>
-        <Title>Recentemente Adicionados</Title>
-        <HighlightProducts>
-          {products.slice(-5).reverse().map((book, index) => (
-            <Product key={index}>
-              <Info onClick={() => navigate(`/product/${book._id}`)}>
-                <Front src={book.imageURL} />
-                <h1>{book.title}</h1>
-                <h2>R$ {book.price}</h2>
-              </Info>
-              <button onClick={() => addItemCart(book)}>Comprar</button>
-            </Product>
-          ))}
-        </HighlightProducts>
-      </div>
-    </Highlights>
-  </PageStyle>
-);
+  return (
+    <PageStyle>
+      <Header />
+      <Sidebar />
+      <Main position={sideBar? "absolute":"initial"}>
+        <Highlights>
+          <div>
+            <Title>Mais Vendidos</Title>
+            <HighlightProducts>
+              {hightLights.map((book, index) => (
+                <Product key={index}>
+                  <Info onClick={() => navigate(`/product/${book._id}`)}>
+                    <Front src={book.imageURL} />
+                    <h1>{book.title}</h1>
+                    <h2>R$ {book.price}</h2>
+                  </Info>
+                  <button onClick={() => addItemCart(book)}>Comprar</button>
+                </Product>
+              ))}
+            </HighlightProducts>
+          </div>
+        </Highlights>
+        <Highlights>
+          <div>
+            <Title>Recentemente Adicionados</Title>
+            <HighlightProducts>
+              {products
+                .slice(-5)
+                .reverse()
+                .map((book, index) => (
+                  <Product key={index}>
+                    <Info onClick={() => navigate(`/product/${book._id}`)}>
+                      <Front src={book.imageURL} />
+                      <h1>{book.title}</h1>
+                      <h2>R$ {book.price}</h2>
+                    </Info>
+                    <button onClick={() => addItemCart(book)}>Comprar</button>
+                  </Product>
+                ))}
+            </HighlightProducts>
+          </div>
+        </Highlights>
+      </Main>
+    </PageStyle>
+  );
 }
 
-const PageStyle = styled.div`
+const Main = styled.div`
   margin-top: 17vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
+  position: ${props => props.position};
+left: -200px;
+
+`
+
+const PageStyle = styled.div`
+
 `;
 
 const Title = styled.h1`
@@ -130,7 +143,7 @@ const Product = styled.div`
   padding-top: 6px;
   padding-bottom: 6px;
   border-radius: 10px;
-  >button{
+  > button {
     margin-top: 10px;
     border-radius: 5px;
     border: none;

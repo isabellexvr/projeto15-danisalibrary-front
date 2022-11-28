@@ -23,20 +23,17 @@ export default function CategoryPage() {
       .get(`https://danisalibrary.onrender.com/get-products/${category}`)
       .then((answer) => {
         setProducts(answer.data);
-        console.log(answer.data);
       })
       .catch((err) => console.log(err));
   }, [category]);
 
   function addItemCart(prod) {
-    console.log("prod", prod);
     setCounter(counter + 1)
     const exist = cart.some((book) => book._id === prod._id)
     if (exist) {
       alert("Este livro já está no seu carrinho :)")
     } else {
       const newBook = [...cart, prod];
-      console.log("livros", newBook);
       setCart(newBook);
     }
   }

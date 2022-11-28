@@ -13,7 +13,6 @@ export default function CartPage() {
 
   const { cart, setCart, counter, setCounter, balance, setBalance } =
     useContext(AuthContext);
-  console.log("cart", cart);
 
   function removeItemCart(prod) {
     setCounter(counter - 1);

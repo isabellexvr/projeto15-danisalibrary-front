@@ -18,8 +18,6 @@ export default function SaleInfoPage() {
 
   const { cart, balance } = useContext(AuthContext);
 
-  console.log(cart);
-
   function handleForm({ target: { value, name } }) {
     setForm({ ...form, [name]: value });
   }

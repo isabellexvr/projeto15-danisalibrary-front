@@ -96,7 +96,6 @@ export default function Sidebar() {
                         setUserInfo({});
                         setSideBar(false);
                         navigate("/");
-                        console.log(userInfo);
                       })
                       .catch((err) => console.log(err.data));
                   }}
