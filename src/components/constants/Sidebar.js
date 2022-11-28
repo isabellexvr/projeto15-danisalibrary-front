@@ -107,11 +107,11 @@ export default function Sidebar() {
               )}
               {!isLogged && (
                 <StyleFix>
-                  <LogOut>
+                  <LogOut onClick={()=>navigate("/sign-in")}>
                     <BiLogIn />
                     <h1>Fazer Login</h1>
                   </LogOut>
-                  <LogOut>
+                  <LogOut onClick={()=>navigate("/sign-up")}>
                     <BiPlus/>
                     <h1>Fazer Cadastro</h1>
                   </LogOut>
