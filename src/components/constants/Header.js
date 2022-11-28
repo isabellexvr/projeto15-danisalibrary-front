@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../colors";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
+import { FaUserAlt, FaShoppingCart, FaWhatsapp } from "react-icons/fa";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -13,6 +13,12 @@ export default function Header() {
 
   const navigate = useNavigate();
 
+  function whats(){
+    let text = "Olá, DanIsa Library!";
+    let url = `https://wa.me/5548998215536?text=${text}`
+
+    window.open(url);
+  }
 
   return (
     <HeaderStyle>
@@ -35,6 +41,7 @@ export default function Header() {
           <Contador>
             <h1>{counter}</h1>
           </Contador>
+          <FaWhatsapp onClick={whats} />
         </div>
       </Top>
       <HorizontalLine />

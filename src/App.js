@@ -14,6 +14,7 @@ import AuthProvider from "./contexts/Cart";
 import ProductPage from "./components/pages/SingleProductPage";
 import SaleInfoPage from "./components/pages/SaleInfoPage";
 
+
 function App() {
   return (
     <UserInfoProvider>
