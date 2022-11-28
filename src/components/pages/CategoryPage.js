@@ -62,7 +62,7 @@ export default function CategoryPage() {
                 <Info onClick={()=>navigate(`/product/${product._id}`)}>
                   <img alt="book-cover" src={product.imageURL} />
                   <h1>{product.title}</h1>
-                  <h2>{product.price}</h2>
+                  <h2>{product.price.$numberDecimal}</h2>
                 </Info>
 
                 <button onClick={() => addItemCart(product)}>Comprar</button>
