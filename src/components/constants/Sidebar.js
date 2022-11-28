@@ -35,7 +35,7 @@ export default function Sidebar() {
   const { sideBar, setSideBar } = useSidebar();
   const navigate = useNavigate();
   const { setTheme, theme } = useTheme();
-  const { userInfo } = useUserInfo();
+  const { userInfo, setUserInfo } = useUserInfo();
 
   return (
     <>
@@ -84,13 +84,14 @@ export default function Sidebar() {
                     },
                   };
                   axios
-                    .delete(`https://danisalibrary.onrender.com/logout`, config)
-                    .then((answer) => console.log(answer.data))
+                    .delete(`https://danisalibrary.onrender.com/logout`, config).then((answer) => {
+                      localStorage.removeItem("data");
+                      setUserInfo({});
+                      setSideBar(false);
+                      navigate("/");
+                      console.log(userInfo);
+                    })
                     .catch((err) => console.log(err.data));
-                  console.log(JSON.parse(isLogged));
-                  localStorage.removeItem("data");
-                  setSideBar(false);
-                  navigate("/");
                 }}
               >
                 <BiLogOut />
@@ -126,7 +127,8 @@ export default function Sidebar() {
             </div>
           </SideBarContent>
         </>
-      )}
+      )
+      }
     </>
   );
 }

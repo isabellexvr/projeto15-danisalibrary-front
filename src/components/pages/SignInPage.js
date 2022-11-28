@@ -45,6 +45,7 @@ export default function SignInPage() {
       })
       .catch((err) => {
         console.log(err.response.data.message);
+        alert(err.response.data.message)
         setLoading(false);
       });
   }

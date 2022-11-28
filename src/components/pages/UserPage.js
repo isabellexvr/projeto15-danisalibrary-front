@@ -75,6 +75,8 @@ export default function UserPage() {
         <PageStyle>
             <Header />
             <Sidebar />
+            {userInfo.token
+            ?
             <Inputs>
                 <h2>Altere ou insira seus dados</h2>
                 <form onSubmit={chanceData}>
@@ -102,15 +104,6 @@ export default function UserPage() {
                     </Input>
                     <FaPencilAlt onClick={() => habilitae("photo")} />
                     </Teste>
-                    {/* <Input>
-                        <input
-                            type="text"
-                            placeholder="Endereço"
-                            onChange={(e) => setZipCode(e.target.value)}
-                            value={zipCode}
-                            disabled={desabilitar}
-                        />
-                    </Input>  */}
                     <Button color={colors.purple}>
                         <button
                             type="submit"
@@ -120,9 +113,12 @@ export default function UserPage() {
                     </Button>
                 </form>
             </Inputs>
-            <StyledLink to="/sign-up">
-                <h1>Ainda não possui cadastro? Clique aqui!</h1>
+            :
+            <StyledLink to="/sign-in">
+                <h1>Ainda não está logado? Clique aqui!</h1>
             </StyledLink>
+         }
+    
         </PageStyle>
     );
 }
@@ -201,9 +197,10 @@ const StyledLink = styled(Link)`
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 30px;
   color:  #7847a1;
   text-decoration: none;
+  margin-top: 20px;
 `;
 
 const Teste = styled.div`

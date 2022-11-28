@@ -15,7 +15,7 @@ export default function ProductsPage() {
 
   const [products, setProducts] = useState([]);
 
-  const { setCart, cart, counter, setCounter } = useContext(AuthContext);
+  const { setCart, cart, counter, setCounter, balance, setBalnce } = useContext(AuthContext);
 
   useEffect((() => {
     axios.get("https://danisalibrary.onrender.com/get-products")
@@ -36,6 +36,12 @@ export default function ProductsPage() {
       console.log("livros", newBook);
       setCart(newBook);
     }
+
+    sum()
+  }
+
+  function sum(){
+
   }
 
   return (
